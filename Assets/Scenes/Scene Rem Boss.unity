@@ -516,10 +516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f683ee135430d04fa66bf04ab0493b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 919132149155446097, guid: 1913f9676e58572479475afb8a9d1c5f, type: 3}
+  bulletPrefab: {fileID: 9065906998282379174, guid: 2b6a2a979a81f994da0147c34eb0b520, type: 3}
   firePoint: {fileID: 848048015}
   fireRate: 2
-  bulletSpeed: 10
 --- !u!1001 &1963038324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -653,6 +652,7 @@ MonoBehaviour:
   shootDelay: 0
   movementSpeed: 10
   bulletRef: {fileID: 0}
+  bulletSpawn: []
 --- !u!114 &2113260996
 MonoBehaviour:
   m_ObjectHideFlags: 0

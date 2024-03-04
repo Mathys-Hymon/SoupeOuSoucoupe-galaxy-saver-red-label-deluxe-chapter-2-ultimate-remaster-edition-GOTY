@@ -5,7 +5,7 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 2f;  // Bullets per second
-    float duration = 1f;
+    float duration = 5f;
 
     private float timeSinceLastFire = 0f;
 
@@ -19,18 +19,7 @@ public class Shooting : MonoBehaviour
 
     private void Update()
     {
-        // Update the timer
-        timeSinceLastFire += Time.deltaTime;
 
-        // Check if it's time to shoot
-        if (timeSinceLastFire >= 1f / fireRate)  // Inverse of fire rate to get time between shots
-        {
-            // Reset the timer
-            timeSinceLastFire = 0f;
-
-            // Call a random shooting pattern
-            //RandomShootingPattern();
-        }
     }
 
     void RandomShootingPattern()
@@ -41,15 +30,15 @@ public class Shooting : MonoBehaviour
         switch (patternSelector)
         {
             case 0:
-                duration = 5f;
+                
                 ShootStraight();
                 break;
             case 1:
-                duration = 10f;
+                
                 ShootMultipleLines();
                 break;
             case 2:
-                duration = 15f;
+                
                 ShootSinusoidalWave();
                 break;
                 // Add more cases for additional patterns
@@ -58,11 +47,13 @@ public class Shooting : MonoBehaviour
 
     void ShootStraight()
     {
-        
+        duration = 5f;
+
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         while (duration > 0)
         {
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            
 
             Debug.Log("Straight");
 
@@ -74,6 +65,8 @@ public class Shooting : MonoBehaviour
 
     void ShootMultipleLines()
     {
+        duration = 5f;
+
         while (duration > 0)
         {
             
@@ -87,10 +80,12 @@ public class Shooting : MonoBehaviour
 
     void ShootSinusoidalWave()
     {
+        duration = 5f;
+
         while (duration > 0)
         {
-            
 
+            
             Debug.Log("Wave");
 
             duration -= Time.deltaTime;
