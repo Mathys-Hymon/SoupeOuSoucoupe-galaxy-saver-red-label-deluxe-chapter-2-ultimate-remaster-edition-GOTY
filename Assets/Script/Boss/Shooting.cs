@@ -1,13 +1,21 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireRate = 0.5f;  // Bullets per second
+    public float fireRate = 2f;  // Bullets per second
+    float duration = 1f;
 
     private float timeSinceLastFire = 0f;
+
+
+    private void Start()
+    {
+        RandomShootingPattern();
+    }
+
+
 
     private void Update()
     {
@@ -21,83 +29,72 @@ public class Shooting : MonoBehaviour
             timeSinceLastFire = 0f;
 
             // Call a random shooting pattern
-            RandomShootingPattern();
+            //RandomShootingPattern();
         }
     }
 
     void RandomShootingPattern()
     {
-       
+
         int patternSelector = Random.Range(0, 3);  // Change the range based on the number of patterns
 
         switch (patternSelector)
         {
             case 0:
-                StartCoroutine(ShootPattern(2f));  // Shoot pattern lasts 5 seconds
+                duration = 5f;
+                ShootStraight();
                 break;
             case 1:
-                StartCoroutine(ShootStraightPattern(10f));  // ShootStraight pattern lasts 10 seconds
+                duration = 10f;
+                ShootMultipleLines();
                 break;
             case 2:
-                StartCoroutine(ShootSinusoidalPattern(10f));  // ShootSinusoidal pattern lasts 8 seconds
+                duration = 15f;
+                ShootSinusoidalWave();
                 break;
                 // Add more cases for additional patterns
         }
     }
 
-    System.Collections.IEnumerator ShootPattern(float duration)
+    void ShootStraight()
     {
-        while (duration > 0f)
+        
+
+        while (duration > 0)
         {
-            // Shooting logic
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
-            // Update duration
-            duration -= Time.deltaTime;
+            Debug.Log("Straight");
 
-            yield return null;
+            duration -= Time.deltaTime;
         }
 
-        
-
-        // After the pattern is finished, call the random shooting pattern again
         RandomShootingPattern();
     }
 
-    System.Collections.IEnumerator ShootStraightPattern(float duration)
+    void ShootMultipleLines()
     {
-        
-        while (duration > 0f)
+        while (duration > 0)
         {
-            // Shooting logic for ShootStraight pattern
-            //Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            Debug.Log("straight");
+            
 
-            // Update duration
+            Debug.Log("Mult");
+
             duration -= Time.deltaTime;
-
-            yield return null;
         }
-
-        // After the pattern is finished, call the random shooting pattern again
         RandomShootingPattern();
     }
 
-    System.Collections.IEnumerator ShootSinusoidalPattern(float duration)
+    void ShootSinusoidalWave()
     {
-        while (duration > 0f)
+        while (duration > 0)
         {
-            // Shooting logic for ShootSinusoidal pattern
-            //Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            Debug.Log("sinus");
+            
 
-            // Update duration
+            Debug.Log("Wave");
+
             duration -= Time.deltaTime;
-
-            yield return null;
         }
-
-        // After the pattern is finished, call the random shooting pattern again
         RandomShootingPattern();
     }
     // Add more pattern functions as needed
