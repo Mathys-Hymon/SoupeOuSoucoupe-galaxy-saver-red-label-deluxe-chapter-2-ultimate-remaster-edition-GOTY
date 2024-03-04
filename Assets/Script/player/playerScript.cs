@@ -29,6 +29,15 @@ public class playerScript : MonoBehaviour
         isShooting = context.ReadValueAsButton();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Ennemie")
+        {
+            print("damaged");
+        }
+
+    }
+
     private void Update()
     {
         if(isShooting && delay >= shootDelay)
@@ -48,7 +57,7 @@ public class playerScript : MonoBehaviour
 
         if(Mathf.Abs(transform.position.x) >= 11.20f)
         {
-            transform.position -= new Vector3(transform.position.x/10 * Time.deltaTime, 0,0);
+            transform.position -= new Vector3(transform.position.x/50 * Time.deltaTime, 0,0);
         }
 
         else
@@ -58,7 +67,7 @@ public class playerScript : MonoBehaviour
         }
         if (Mathf.Abs(transform.position.y) >= 6.15f)
         {
-            transform.position -= new Vector3(0, transform.position.y/10 * Time.deltaTime, 0);
+            transform.position -= new Vector3(0, transform.position.y/50 * Time.deltaTime, 0);
         }
         else
         {
