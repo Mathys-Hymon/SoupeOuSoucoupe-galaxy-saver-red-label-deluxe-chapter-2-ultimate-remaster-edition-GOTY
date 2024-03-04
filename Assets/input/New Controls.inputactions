@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "ability",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "240c891c-0be0-42df-a7f2-aa825ef67d98",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -34,7 +34,7 @@
                 },
                 {
                     "name": "PauseMenu",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "5f3bd47d-a1d3-4999-a3ac-79f765318a2b",
                     "expectedControlType": "Button",
                     "processors": "",

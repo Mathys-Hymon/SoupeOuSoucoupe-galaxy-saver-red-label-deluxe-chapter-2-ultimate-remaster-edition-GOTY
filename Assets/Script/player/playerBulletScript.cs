@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class playerBulletScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float bulletSpeed = 10f;
+    private void Update()
     {
-        
-    }
+        transform.position += transform.right * bulletSpeed * Time.deltaTime;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(transform.position.x > 14f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
