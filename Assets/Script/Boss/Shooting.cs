@@ -8,21 +8,13 @@ public class BossShooting : MonoBehaviour
 
     private float timeSinceLastFire = 0f;
 
-    private void Update()
+
+
+    private void Start()
     {
-        // Update the timer
-        timeSinceLastFire += Time.deltaTime;
-
-        // Check if it's time to shoot
-        if (timeSinceLastFire >= 1f / fireRate)  // Inverse of fire rate to get time between shots
-        {
-            // Reset the timer
-            timeSinceLastFire = 0f;
-
-            // Call a random shooting pattern
-            RandomShootingPattern();
-        }
+        RandomShootingPattern();
     }
+
 
     void RandomShootingPattern()
     {
@@ -46,18 +38,36 @@ public class BossShooting : MonoBehaviour
     void ShootStraight()
     {
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        Invoke("RandomShootingPattern", 5f);
+
+            
     }
 
     void ShootMultipleLines()
     {
         // Implement logic to shoot multiple lines with different angles
         // You can use loops and change the rotation of bullets
+        Debug.Log("Mult");
+
+
+        Invoke("RandomShootingPattern", 5f);
+
+
+
     }
 
     void ShootSinusoidalWave()
     {
         // Implement logic to shoot bullets in a sinusoidal wave pattern
         // You can use Mathf.Sin to achieve this
+        Debug.Log("Wave");
+
+        Invoke("RandomShootingPattern", 5f);
+
+
+
+
     }
-    // Add more pattern functions as needed
+    
 }
