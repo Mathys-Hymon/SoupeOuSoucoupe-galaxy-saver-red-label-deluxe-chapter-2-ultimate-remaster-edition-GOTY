@@ -18,7 +18,7 @@ public class BossShooting : MonoBehaviour
 
     void RandomShootingPattern()
     {
-        int patternSelector = Random.Range(0, 4);  // Change the range based on the number of patterns
+        int patternSelector = Random.Range(0, 4);  
 
 
         CancelInvoke("FireBulletStraight");
@@ -40,7 +40,7 @@ public class BossShooting : MonoBehaviour
             case 3:
                 ShootSinus2();
                 break;
-                // Add more cases for additional patterns
+                
         }
     }
 
@@ -48,10 +48,10 @@ public class BossShooting : MonoBehaviour
     {
         Debug.Log("Straight");
 
-        // Shoot multiple bullets with a certain fire rate until canceled
+        
         InvokeRepeating("FireBulletStraight", 0f, 1f / fireRate);
 
-        // Schedule the end of continuous shooting
+        
         Invoke("StopShootingStraight", 5f);
     }
 
@@ -63,10 +63,10 @@ public class BossShooting : MonoBehaviour
 
     void StopShootingStraight()
     {
-        // Cancel the repeating invocation to stop shooting
+        
         CancelInvoke("FireBullet");
 
-        // Call the random shooting pattern function to choose a new pattern
+        
         RandomShootingPattern();
     }
 
@@ -75,10 +75,10 @@ public class BossShooting : MonoBehaviour
     {
         Debug.Log("Mult");
 
-        // Shoot multiple bullets with a certain fire rate until canceled
+        
         InvokeRepeating("FireBulletMult", 0f, 1f / fireRate);
 
-        // Schedule the end of continuous shooting
+        
         Invoke("StopShootingMult", 5f);
     }
 
@@ -88,7 +88,7 @@ public class BossShooting : MonoBehaviour
     {
 
         // Instantiate five bullets with different initial directions
-        float[] angles = { -20f, -10f, 0f, 10f, 20f }; // Example angles, adjust as needed
+        float[] angles = { -20f, -10f, 0f, 10f, 20f }; 
 
         foreach (float angle in angles)
         {
@@ -100,10 +100,10 @@ public class BossShooting : MonoBehaviour
 
     void StopShootingMult()
     {
-        // Cancel the repeating invocation to stop shooting
+        
         CancelInvoke("FireBulletMult");
 
-        // Call the random shooting pattern function to choose a new pattern
+        
         RandomShootingPattern();
     }
 
@@ -112,10 +112,10 @@ public class BossShooting : MonoBehaviour
     {
         Debug.Log("Sinus");
 
-        // Shoot multiple bullets with a certain fire rate until canceled
+        
         InvokeRepeating("FireBulletSinus", 0f, 1f / fireRate);
 
-        // Schedule the end of continuous shooting
+        
         Invoke("StopShootingSinus", 5f);
     }
 
@@ -124,7 +124,7 @@ public class BossShooting : MonoBehaviour
     void FireBulletSinus()
     {
 
-        // Instantiate bullets in a sinusoidal wave pattern with smaller angle differences
+        // smaller angle differences
         int numBullets = 15;  // Number of bullets in the wave
         float angleDifference = 4f;  // Angle difference between consecutive bullets
 
@@ -139,10 +139,10 @@ public class BossShooting : MonoBehaviour
 
     void StopShootingSinus()
     {
-        // Cancel the repeating invocation to stop shooting
+        
         CancelInvoke("FireBulletSinus");
 
-        // Call the random shooting pattern function to choose a new pattern
+        
         RandomShootingPattern();
     }
 
@@ -152,10 +152,10 @@ public class BossShooting : MonoBehaviour
     {
         Debug.Log("Sinus2");
 
-        // Shoot multiple bullets with a certain fire rate until canceled
+        
         InvokeRepeating("FireBulletSinus2", 0f, 1f / fireRate);
 
-        // Schedule the end of continuous shooting
+        
         Invoke("StopShootingSinus2", 5f);
     }
 
@@ -164,7 +164,7 @@ public class BossShooting : MonoBehaviour
     void FireBulletSinus2()
     {
 
-        // Instantiate bullets in a sinusoidal wave pattern with smaller angle differences
+        // smaller angle differences
         int numBullets = 15;  // Number of bullets in the wave
         float angleDifference = -4f;  // Angle difference between consecutive bullets
 
@@ -179,10 +179,10 @@ public class BossShooting : MonoBehaviour
 
     void StopShootingSinus2()
     {
-        // Cancel the repeating invocation to stop shooting
+        
         CancelInvoke("FireBulletSinus2");
 
-        // Call the random shooting pattern function to choose a new pattern
+        
         RandomShootingPattern();
     }
 
