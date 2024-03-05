@@ -8,9 +8,11 @@ public class EnnemiBulletScript : MonoBehaviour
 
     private int bulletType;
     private float timer = 0f;
+    private Vector3 direction;
 
-    public void InitializeBullet(int _bulletType)
+    public void InitializeBullet(int _bulletType, Vector3 _direction)
     {
+        direction = _direction;
         bulletType = _bulletType;
     }
 
@@ -26,7 +28,8 @@ public class EnnemiBulletScript : MonoBehaviour
                 break;
 
            case 1:
-           break;
+                transform.localPosition += direction * speed * Time.deltaTime;
+                break;
         }
     }
     private void OnTriggerEnter(Collider other)
