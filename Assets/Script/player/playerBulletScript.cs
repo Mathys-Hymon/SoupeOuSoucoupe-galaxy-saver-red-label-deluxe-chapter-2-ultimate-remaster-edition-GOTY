@@ -5,9 +5,15 @@ using UnityEngine;
 public class playerBulletScript : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed = 10f;
+    private float speed = 1;
     private void Update()
     {
-        transform.position += transform.right * bulletSpeed * Time.deltaTime;
+        if(speed < bulletSpeed)
+        {
+            speed += speed * Time.deltaTime* 4;
+        }
+
+        transform.position += transform.right * speed * Time.deltaTime;
 
         if(transform.position.x > 14f)
         {

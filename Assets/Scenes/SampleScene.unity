@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 363109503}
   - component: {fileID: 363109502}
   - component: {fileID: 363109501}
+  - component: {fileID: 363109505}
   m_Layer: 0
   m_Name: Ennemi
   m_TagString: Untagged
@@ -228,6 +229,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &363109505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363109500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c55b8d8e08661459fa95e91f77ee30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &634202247
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,41 +390,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfdc54d99d814a4aa006493c268ffd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLife: 10
+  bulletLife: 50
   rotation: 10
-  speed: 2
+  speed: 3
+  frequency: 0.76
   test:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 6.367924
-      outSlope: 6.367924
+      value: 0.0796597
+      inSlope: 2.4765618
+      outSlope: 2.4765618
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.03720356
+      outWeight: 0.24286482
     - serializedVersion: 3
-      time: 0.50215244
-      value: 1.0100801
-      inSlope: 0.03733997
-      outSlope: 0.03733997
+      time: 0.48427317
+      value: 0.0796597
+      inSlope: -8.211664
+      outSlope: -8.211664
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.41548103
+      inWeight: 0.12438473
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0144317
-      value: -0.004775524
-      inSlope: -3.9927707
-      outSlope: -3.9927707
+      time: 1
+      value: 0.0796597
+      inSlope: 2.8900871
+      outSlope: 2.8900871
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.10639156
+      inWeight: 0.150869
       outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PreInfinity: 1
+    m_PostInfinity: 1
     m_RotationOrder: 4
 --- !u!1 &705507993
 GameObject:

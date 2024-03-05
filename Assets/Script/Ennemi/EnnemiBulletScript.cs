@@ -1,53 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class EnnemiBulletScript : MonoBehaviour
 {
-    public float bulletLife = 10f;  // Defines how long before the bullet is destroyed
-    public float rotation = 0f;
-    public float speed = 1f;
+    [SerializeField] private float speed = 1f;
+    [SerializeField] private float frequency = 1f;
+    [SerializeField] private AnimationCurve wave;
 
-    public AnimationCurve test;
-
-
-    private Vector2 spawnPoint;
+    private int bulletType;
     private float timer = 0f;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void InitializeBullet(int _bulletType)
     {
-        spawnPoint = new Vector2(transform.position.x, transform.position.y);
+        bulletType = _bulletType;
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-        if (timer > bulletLife) Destroy(this.gameObject);
-        timer += Time.deltaTime;
-        //transform.position = Movement(timer);
+        switch(bulletType)
+        {
+            case 0:
+                timer += Time.deltaTime * frequency;
 
-        transform.localPosition += new Vector3(-Time.deltaTime, test.Evaluate(timer/5)*Time.deltaTime, 0);
+                transform.localPosition = new Vector3(transform.localPosition.x, wave.Evaluate(timer) * frequency, 0);
+                transform.localPosition += -Vector3.right * speed * Time.deltaTime;
+                break;
+
+           case 1:
+           break;
+        }
     }
-
-
-    private Vector2 Movement(float timer)
-    {
-        float x = timer * speed * -transform.right.x;
-        float y = timer * speed * -transform.right.y;
-        return new Vector2(x + spawnPoint.x, y + spawnPoint.y);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
             Destroy(gameObject);
         }
-
     }
-
 }
