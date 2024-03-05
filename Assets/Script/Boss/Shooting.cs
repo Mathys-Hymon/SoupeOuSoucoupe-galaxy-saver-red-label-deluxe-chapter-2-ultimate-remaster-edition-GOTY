@@ -18,7 +18,7 @@ public class BossShooting : MonoBehaviour
 
     void RandomShootingPattern()
     {
-        int patternSelector = Random.Range(0, 3);  // Change the range based on the number of patterns
+        int patternSelector = Random.Range(0, 4);  // Change the range based on the number of patterns
 
 
         CancelInvoke("FireBulletStraight");
@@ -35,7 +35,10 @@ public class BossShooting : MonoBehaviour
                 ShootMult();
                 break;
             case 2:
-                ShootSinusoidalWave();
+                ShootSinus();
+                break;
+            case 3:
+                ShootSinus2();
                 break;
                 // Add more cases for additional patterns
         }
@@ -105,13 +108,92 @@ public class BossShooting : MonoBehaviour
     }
 
 
-    void ShootSinusoidalWave()
+    void ShootSinus()
     {
         Debug.Log("Sinus");
 
+        // Shoot multiple bullets with a certain fire rate until canceled
+        InvokeRepeating("FireBulletSinus", 0f, 1f / fireRate);
 
-        Invoke("RandomShootingPattern", 5f);
+        // Schedule the end of continuous shooting
+        Invoke("StopShootingSinus", 5f);
     }
+
+
+
+    void FireBulletSinus()
+    {
+
+        // Instantiate bullets in a sinusoidal wave pattern with smaller angle differences
+        int numBullets = 15;  // Number of bullets in the wave
+        float angleDifference = 4f;  // Angle difference between consecutive bullets
+
+        for (int i = 0; i < numBullets; i++)
+        {
+            float angle = firePoint.rotation.eulerAngles.z + i * angleDifference;
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+            Instantiate(bulletPrefab, firePoint.position, rotation);
+        }
+
+    }
+
+    void StopShootingSinus()
+    {
+        // Cancel the repeating invocation to stop shooting
+        CancelInvoke("FireBulletSinus");
+
+        // Call the random shooting pattern function to choose a new pattern
+        RandomShootingPattern();
+    }
+
+
+
+    void ShootSinus2()
+    {
+        Debug.Log("Sinus2");
+
+        // Shoot multiple bullets with a certain fire rate until canceled
+        InvokeRepeating("FireBulletSinus2", 0f, 1f / fireRate);
+
+        // Schedule the end of continuous shooting
+        Invoke("StopShootingSinus2", 5f);
+    }
+
+
+
+    void FireBulletSinus2()
+    {
+
+        // Instantiate bullets in a sinusoidal wave pattern with smaller angle differences
+        int numBullets = 15;  // Number of bullets in the wave
+        float angleDifference = -4f;  // Angle difference between consecutive bullets
+
+        for (int i = 0; i < numBullets; i++)
+        {
+            float angle = firePoint.rotation.eulerAngles.z + i * angleDifference;
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+            Instantiate(bulletPrefab, firePoint.position, rotation);
+        }
+
+    }
+
+    void StopShootingSinus2()
+    {
+        // Cancel the repeating invocation to stop shooting
+        CancelInvoke("FireBulletSinus2");
+
+        // Call the random shooting pattern function to choose a new pattern
+        RandomShootingPattern();
+    }
+
+
+
+
+
+
+
+
+
 
 
 }
