@@ -128,7 +128,7 @@ public class BossShooting : MonoBehaviour
         int numBullets = 15;  // Number of bullets in the wave
         float angleDifference = 4f;  // Angle difference between consecutive bullets
 
-        for (int i = 0; i < numBullets; i++)
+        for (int i = 1; i < numBullets; i++)
         {
             float angle = firePoint.rotation.eulerAngles.z + i * angleDifference;
             Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
@@ -168,7 +168,7 @@ public class BossShooting : MonoBehaviour
         int numBullets = 15;  // Number of bullets in the wave
         float angleDifference = -4f;  // Angle difference between consecutive bullets
 
-        for (int i = 0; i < numBullets; i++)
+        for (int i = 1; i < numBullets; i++)
         {
             float angle = firePoint.rotation.eulerAngles.z + i * angleDifference;
             Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
