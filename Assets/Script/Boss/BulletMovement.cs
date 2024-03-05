@@ -6,7 +6,7 @@ public class BulletMovement : MonoBehaviour
 
     void Update()
     {
-        // Move the bullet to the left continuously
-        transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
+        // Move the bullet based on its local up direction
+        transform.Translate(-transform.right * speed * Time.deltaTime, Space.World);
     }
 }

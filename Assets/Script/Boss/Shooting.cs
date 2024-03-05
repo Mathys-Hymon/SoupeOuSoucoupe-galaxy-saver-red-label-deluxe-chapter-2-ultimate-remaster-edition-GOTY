@@ -20,13 +20,19 @@ public class BossShooting : MonoBehaviour
     {
         int patternSelector = Random.Range(0, 3);  // Change the range based on the number of patterns
 
+
+        CancelInvoke("FireBulletStraight");
+
+        CancelInvoke("FireBulletMult");
+
         switch (patternSelector)
         {
             case 0:
                 ShootStraight();
+                
                 break;
             case 1:
-                ShootMultipleLines();
+                ShootMult();
                 break;
             case 2:
                 ShootSinusoidalWave();
@@ -37,37 +43,75 @@ public class BossShooting : MonoBehaviour
 
     void ShootStraight()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Debug.Log("Straight");
 
-        Invoke("RandomShootingPattern", 5f);
+        // Shoot multiple bullets with a certain fire rate until canceled
+        InvokeRepeating("FireBulletStraight", 0f, 1f / fireRate);
 
-            
+        // Schedule the end of continuous shooting
+        Invoke("StopShootingStraight", 5f);
     }
 
-    void ShootMultipleLines()
+
+    void FireBulletStraight()
     {
-        // Implement logic to shoot multiple lines with different angles
-        // You can use loops and change the rotation of bullets
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    }
+
+    void StopShootingStraight()
+    {
+        // Cancel the repeating invocation to stop shooting
+        CancelInvoke("FireBullet");
+
+        // Call the random shooting pattern function to choose a new pattern
+        RandomShootingPattern();
+    }
+
+
+    void ShootMult()
+    {
         Debug.Log("Mult");
 
+        // Shoot multiple bullets with a certain fire rate until canceled
+        InvokeRepeating("FireBulletMult", 0f, 1f / fireRate);
 
-        Invoke("RandomShootingPattern", 5f);
+        // Schedule the end of continuous shooting
+        Invoke("StopShootingMult", 5f);
+    }
 
 
+
+    void FireBulletMult()
+    {
+
+        // Instantiate five bullets with different initial directions
+        float[] angles = { -20f, -10f, 0f, 10f, 20f }; // Example angles, adjust as needed
+
+        foreach (float angle in angles)
+        {
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+            Instantiate(bulletPrefab, firePoint.position, rotation);
+        }
 
     }
+
+    void StopShootingMult()
+    {
+        // Cancel the repeating invocation to stop shooting
+        CancelInvoke("FireBulletMult");
+
+        // Call the random shooting pattern function to choose a new pattern
+        RandomShootingPattern();
+    }
+
 
     void ShootSinusoidalWave()
     {
-        // Implement logic to shoot bullets in a sinusoidal wave pattern
-        // You can use Mathf.Sin to achieve this
-        Debug.Log("Wave");
+        Debug.Log("Sinus");
+
 
         Invoke("RandomShootingPattern", 5f);
-
-
-
-
     }
-    
+
+
 }
