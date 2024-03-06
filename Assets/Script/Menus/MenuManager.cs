@@ -13,13 +13,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private InputActionReference escape;
     [SerializeField] private Button startBtn;
     [SerializeField] private Slider volumeSlider;
-    [SerializeField] private Animator animator;
 
 
     void Start()
     {
         instance = this;
-        animator.SetTrigger("Menu");
         Return();
     }
 
@@ -45,7 +43,14 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    
+    public void StartButton()
+    {
+        GameObject.Find("StartButton").GetComponent<Button>().enabled = false;
+        GameObject.Find("StartButton").GetComponent<Image>().enabled = false;
+        SceneManager.LoadScene(1);
+    }
+
+
     public void ReturnBack(InputAction.CallbackContext obj)
     {
         Return();
