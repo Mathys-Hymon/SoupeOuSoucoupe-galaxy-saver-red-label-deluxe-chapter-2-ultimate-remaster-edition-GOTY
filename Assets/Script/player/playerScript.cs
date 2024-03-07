@@ -7,6 +7,7 @@ public class playerScript : MonoBehaviour
     [SerializeField] private float movementSpeed = 1;
     [SerializeField] private int maxLife;
     [SerializeField] private GameObject bulletRef;
+    [SerializeField] private GameObject particleRef;
     [SerializeField] private Transform[] bulletSpawn;
 
     private Vector2 input;
@@ -36,7 +37,7 @@ public class playerScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Ennemie")
         {
-            print("damaged");
+            Damaged(1);
         }
 
     }
@@ -80,7 +81,13 @@ public class playerScript : MonoBehaviour
     public void Damaged(int damage)
     {
         life -= damage;
-        if(life <= 0)
+        particleRef.SetActive(false);
+        if (life == 1)
+        {
+            particleRef.SetActive(true);
+        }
+
+        else if(life <= 0)
         {
             Die();
         }
@@ -88,6 +95,6 @@ public class playerScript : MonoBehaviour
 
     private void Die()
     {
-
+        print("dead");
     }
 }

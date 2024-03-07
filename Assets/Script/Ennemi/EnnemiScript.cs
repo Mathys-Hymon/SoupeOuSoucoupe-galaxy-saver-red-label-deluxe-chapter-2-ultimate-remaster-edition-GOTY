@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.Windows;
+
 
 public class EnnemiScript : MonoBehaviour
 {
@@ -11,10 +10,11 @@ public class EnnemiScript : MonoBehaviour
     [SerializeField] private bulletTypeEnum bulletType;
     [SerializeField] private movementEnum movementType;
 
+    private float angle = 0f;
     private bool goUp;
     private Vector2 startPostion;
-    float timeCounter = 0;
     private Rigidbody rb;
+    private int formationPos;
 
     private enum bulletTypeEnum
     {
@@ -34,12 +34,23 @@ public class EnnemiScript : MonoBehaviour
         InvokeRepeating("shoot", 0f, 5/shootRate);
     }
 
-    private void Update()
+
+    public void InitializeEnnemie(int _bulletPerShoot, int _lifePoints, float _speed, float _shootRate, int formationPosition)
+    {
+        bulletPerShoot = _bulletPerShoot;
+        lifePoints = _lifePoints;
+        speed = _speed;
+        shootRate = _shootRate;
+        formationPos = formationPosition;
+        angle -= formationPos/1.5f;
+    }
+
+    private void FixedUpdate()
     {
         Quaternion rotation = Quaternion.identity;
 
         transform.GetChild(0).localRotation = Quaternion.Slerp(transform.GetChild(0).localRotation, Quaternion.Euler(Mathf.Clamp(-rb.velocity.x * 12, -12, 12), -90, Mathf.Clamp(-rb.velocity.y * 10, -20, 20)), 20 * Time.deltaTime);
-        if(transform.position.y >= 6.15f)
+        if (transform.position.y >= 6.15f)
         {
             goUp = false;
         }
@@ -50,23 +61,24 @@ public class EnnemiScript : MonoBehaviour
 
         switch (movementType)
         {
-            case movementEnum.line :
-                if(goUp)
+            case movementEnum.line:
+                if (goUp)
                 {
-                    rb.velocity = new Vector3(-speed/2, speed, 0);
+                    rb.velocity = new Vector3(-speed / 2, speed, 0);
                 }
                 else
                 {
-                    rb.velocity = new Vector3(-speed/2, -speed, 0);
+                    rb.velocity = new Vector3(-speed / 2, -speed, 0);
                 }
-                print(rb.velocity);
                 break;
 
-            case movementEnum.round :
+            case movementEnum.round:
 
-                timeCounter += Time.deltaTime;
-                Vector2 offset = new Vector2(Mathf.Sin(timeCounter), Mathf.Cos(timeCounter)) * circleRad;
-                rb.velocity = offset + (Vector2.right * -speed/4);
+                angle += speed * Time.deltaTime;
+                float x = (startPostion.x -= (speed/2)*Time.deltaTime) + circleRad * Mathf.Cos(angle);
+                float y = startPostion.y + circleRad * Mathf.Sin(angle);
+
+                rb.MovePosition(new Vector3(x, y, 0));
                 break;
         }
     }
@@ -104,7 +116,6 @@ public class EnnemiScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("hello");
         if(collision.gameObject.GetComponent<playerBulletScript>() != null)
         {
             lifePoints--;
@@ -114,8 +125,11 @@ public class EnnemiScript : MonoBehaviour
                 Die();
             }
         }
+        else if (collision.gameObject.GetComponent<playerScript>() != null)
+        {
+            collision.gameObject.GetComponent<playerScript>().Damaged(1);
+        }
     }
-
 
 
     private void Die()
