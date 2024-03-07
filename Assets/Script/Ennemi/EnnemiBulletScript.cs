@@ -31,6 +31,11 @@ public class EnnemiBulletScript : MonoBehaviour
                 transform.localPosition += direction * speed * Time.deltaTime;
                 break;
         }
+
+        if(transform.position.x < -20)
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
