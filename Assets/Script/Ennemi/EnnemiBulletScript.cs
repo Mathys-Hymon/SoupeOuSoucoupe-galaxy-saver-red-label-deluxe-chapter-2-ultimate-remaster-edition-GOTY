@@ -39,7 +39,7 @@ public class EnnemiBulletScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && !other.gameObject.GetComponent<playerScript>().GetIsInvicible())
         {
             Destroy(gameObject);
         }
