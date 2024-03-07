@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -46,8 +47,9 @@ public class MenuManager : MonoBehaviour
     public void StartButton()
     {
         GameObject.Find("StartButton").GetComponent<Button>().enabled = false;
-        GameObject.Find("StartButton").GetComponent<Image>().enabled = false;
-        SceneManager.LoadScene(1);
+
+        GameObject.Find("SpaceShip").GetComponent<Animator>().SetTrigger("start");
+        StartCoroutine("StartButtonColor");
     }
 
 
@@ -92,4 +94,15 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    IEnumerator StartButtonColor()
+    {
+        for(int i = 0; i < 15; i++)
+        {
+            GameObject.Find("StartButton").GetComponent<Image>().color = new Color(0, 0.78f, 1);
+            yield return new WaitForSeconds(0.05f);
+            GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
+            yield return new WaitForSeconds(0.05f);
+        }
+        SceneManager.LoadScene(1);
+    }
 }
