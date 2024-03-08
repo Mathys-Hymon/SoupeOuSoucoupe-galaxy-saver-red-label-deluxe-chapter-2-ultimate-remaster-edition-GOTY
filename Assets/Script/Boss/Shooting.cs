@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossShooting : MonoBehaviour
+public class Shooting : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab1;
     [SerializeField] private GameObject bulletPrefab2;
