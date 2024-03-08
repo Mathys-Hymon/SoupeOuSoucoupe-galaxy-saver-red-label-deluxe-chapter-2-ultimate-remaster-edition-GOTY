@@ -38,9 +38,6 @@ public class EnnemiScript : MonoBehaviour
         InvokeRepeating("shoot", 0f, 5/shootRate);
     }
 
-
-
-
     public void InitializeEnnemie(int _bulletPerShoot, int _lifePoints, float _speed, float _shootRate, int formationPosition)
     {
         bulletPerShoot = _bulletPerShoot;
