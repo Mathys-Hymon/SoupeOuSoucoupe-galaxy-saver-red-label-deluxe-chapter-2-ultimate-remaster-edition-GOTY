@@ -18,13 +18,4 @@ public class playerBulletScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<EnnemiBulletScript>() != null)
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-        }
-    }
 }

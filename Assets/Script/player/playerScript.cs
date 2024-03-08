@@ -41,6 +41,11 @@ public class playerScript : MonoBehaviour
         {
             Damaged();
         }
+        else if(other.gameObject.GetComponent<PickeableScript>() != null)
+        {
+            transform.GetChild(1).GetComponent<LazerScript>().setLazer();
+            Destroy(other.gameObject);
+        }
 
     }
 
@@ -97,10 +102,6 @@ public class playerScript : MonoBehaviour
         else if (life == 0)
         {
             GameObject.Find("Life1").SetActive(false);
-        }
-
-        if (life < 0)
-        {
             Die();
         }
     }

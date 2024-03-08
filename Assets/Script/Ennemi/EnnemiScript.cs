@@ -15,7 +15,7 @@ public class EnnemiScript : MonoBehaviour
     private bool goUp;
     private Vector2 startPostion;
     private Rigidbody rb;
-    private int formationPos;
+    private float formationPos;
 
     private enum bulletTypeEnum
     {
@@ -39,6 +39,8 @@ public class EnnemiScript : MonoBehaviour
     }
 
 
+
+
     public void InitializeEnnemie(int _bulletPerShoot, int _lifePoints, float _speed, float _shootRate, int formationPosition)
     {
         bulletPerShoot = _bulletPerShoot;
@@ -47,6 +49,12 @@ public class EnnemiScript : MonoBehaviour
         shootRate = _shootRate;
         formationPos = formationPosition;
         angle -= formationPos/1.5f;
+        Invoke(nameof(InvokeShoot), formationPos/5);
+    }
+
+    private void InvokeShoot()
+    {
+        InvokeRepeating("shoot", 0, 5 / shootRate);
     }
 
     private void FixedUpdate()
@@ -100,33 +108,37 @@ public class EnnemiScript : MonoBehaviour
 
     private void shoot()
     {
-        for(int i = 0; i < bulletPerShoot; i++)
+        if (transform.position.x < 14f)
         {
-            var bullet = Instantiate(bulletRef, transform.position + -Vector3.right, Quaternion.identity);
-            var bulletScript = bullet.GetComponent<EnnemiBulletScript>();
-
-            Vector3 direction = Vector3.zero;
-
-            if(i == 0)
+            for (int i = 0; i < bulletPerShoot; i++)
             {
-                direction = -Vector3.right;
-            }
-            else
-            {
-                if (i % 2 == 0)
+                var bullet = Instantiate(bulletRef, transform.position + -Vector3.right, Quaternion.identity);
+                var bulletScript = bullet.GetComponent<EnnemiBulletScript>();
+
+                Vector3 direction = Vector3.zero;
+
+                if (i == 0)
                 {
-                    direction = -Vector3.right + new Vector3(0, -i* 0.3f, 0);
+                    direction = -Vector3.right;
                 }
                 else
                 {
-                    direction = -Vector3.right + new Vector3(0, i * 0.3f, 0);
+                    if (i % 2 == 0)
+                    {
+                        direction = -Vector3.right + new Vector3(0, -i * 0.3f, 0);
+                    }
+                    else
+                    {
+                        direction = -Vector3.right + new Vector3(0, i * 0.3f, 0);
+                    }
+
                 }
 
+                bulletScript.InitializeBullet(((int)bulletType), direction);
+
             }
-
-            bulletScript.InitializeBullet(((int)bulletType), direction);
-
         }
+        
     }
     private void OnTriggerEnter(Collider collision)
     {
