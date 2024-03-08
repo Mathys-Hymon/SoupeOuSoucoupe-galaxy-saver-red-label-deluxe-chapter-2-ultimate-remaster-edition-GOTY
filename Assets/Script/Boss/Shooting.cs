@@ -10,7 +10,13 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform firePoint2;
     [SerializeField] private Transform firePoint3;
     [SerializeField] private float fireRate = 2f;
+    private GameObject lifeBar;
     [SerializeField] private GameObject impactPrefab;
+
+    [SerializeField] private AudioSource impactSound;
+    [SerializeField] private AudioSource shootSound;
+    [SerializeField] private AudioSource smallExplosion;
+    [SerializeField] private AudioSource finalExplosion;
 
     [SerializeField] private int lifePoints;
 
@@ -90,6 +96,8 @@ public class Shooting : MonoBehaviour
 
     void FireBulletStraight()
     {
+        shootSound.pitch = (Random.Range(0.8f, 1.2f));
+        shootSound.Play();
         Instantiate(bulletPrefab1, firePoint1.position, Quaternion.identity);
     }
 
@@ -105,6 +113,9 @@ public class Shooting : MonoBehaviour
 
     void FireBulletMult()
     {
+        shootSound.pitch = (Random.Range(0.8f, 1.2f));
+        shootSound.Play();
+
         float[] angles = { -20f, -10f, 0f, 10f, 20f };
         foreach (float angle in angles)
         {
@@ -126,8 +137,8 @@ public class Shooting : MonoBehaviour
 
     void ShootSinus()
     {
-        Debug.Log("Sinus");
         InvokeRepeating("FireBulletSinus", 0f, 1f / fireRate);       
+
         Invoke("StopShootingSinus", 5f);
     }
 
@@ -135,11 +146,12 @@ public class Shooting : MonoBehaviour
 
     void FireBulletSinus()
     {
+        shootSound.pitch = (Random.Range(0.8f, 1.2f));
+        shootSound.Play();
 
-        // smaller angle differences
         int numBullets = 15;  // Number of bullets in the wave
         float angleDifference = 4f;  // Angle difference between consecutive bullets
-
+        
         for (int i = 1; i < numBullets; i++)
         {
             float angle = firePoint1.rotation.eulerAngles.z + i * angleDifference;
@@ -168,9 +180,6 @@ public class Shooting : MonoBehaviour
 
     void ShootSinus2()
     {
-        Debug.Log("Sinus2");
-
-        
         InvokeRepeating("FireBulletSinus2", 0f, 1f / fireRate);
 
         
@@ -181,8 +190,9 @@ public class Shooting : MonoBehaviour
 
     void FireBulletSinus2()
     {
+        shootSound.pitch = (Random.Range(0.8f, 1.2f));
+        shootSound.Play();
 
-        // smaller angle differences
         int numBullets = 15;  // Number of bullets in the wave
         float angleDifference = -4f;  // Angle difference between consecutive bullets
 
@@ -206,13 +216,15 @@ public class Shooting : MonoBehaviour
 
     void ShootUpDown()
     {
-        Debug.Log("UpDown");
         InvokeRepeating("FireBulletUpDown", 0f, 1f / fireRate);
         InvokeRepeating("FireBulletUpDown2", 0f, 1f / fireRate);
         Invoke("StopShootingUpDown", 5f);
     }
     void FireBulletUpDown()
     {
+        shootSound.pitch = (Random.Range(0.8f, 1.2f));
+        shootSound.Play();
+
         float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange;  // Use Mathf.Sin for a smooth wave motion
         Vector3 spawnPosition = firePoint1.position + new Vector3(0f, verticalOffset, 0f);
 
@@ -227,6 +239,9 @@ public class Shooting : MonoBehaviour
     }
     void FireBulletUpDown2()
     {
+        shootSound.pitch = (Random.Range(0.8f, 1.2f));
+        shootSound.Play();
+
         float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange;  // Use Mathf.Sin for a smooth wave motion
         Vector3 spawnPosition = firePoint2.position - new Vector3(0f, verticalOffset, 0f);
 
@@ -248,7 +263,11 @@ public class Shooting : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<playerBulletScript>() != null)
         {
+            impactSound.pitch = (Random.Range(0.8f, 1.2f));
+            impactSound.Play();
+
             Instantiate(impactPrefab, collision.transform.position, collision.transform.rotation);
+
             Destroy(collision.gameObject);
             lifePoints--;
             GameObject.Find("BossLife").GetComponent<Slider>().value = lifePoints;
@@ -265,24 +284,32 @@ public class Shooting : MonoBehaviour
 
     public void SmallExplosion1()
     {
+        smallExplosion.Play();
+
         GameObject.Find("Explosion1").GetComponent<ParticleSystem>().Play();
         GameObject.Find("Explosion1").GetComponent<CFXR_Effect>().enabled = true;
     }
 
     public void SmallExplosion2()
     {
+        smallExplosion.Play();
+
         GameObject.Find("Explosion2").GetComponent<ParticleSystem>().Play();
         GameObject.Find("Explosion2").GetComponent<CFXR_Effect>().enabled = true;
     }
 
     public void SmallExplosion3()
     {
+        smallExplosion.Play();
+
         GameObject.Find("Explosion3").GetComponent<ParticleSystem>().Play();
         GameObject.Find("Explosion3").GetComponent<CFXR_Effect>().enabled = true;
     }
 
     public void FinalExplosion()
     {
+        finalExplosion.Play();
+
         Invoke("HideMesh", 0.4f);
 
         GameObject.Find("FinalExplosion1").GetComponent<ParticleSystem>().Play();
@@ -307,6 +334,9 @@ public class Shooting : MonoBehaviour
 
     private void Die()
     {
+        GameObject.Find("BossMusic").GetComponent<AudioSource>().Stop();
+        GameObject.Find("WavesMusic").GetComponent<AudioSource>().Play();
+
         Destroy(gameObject);
     }
 }

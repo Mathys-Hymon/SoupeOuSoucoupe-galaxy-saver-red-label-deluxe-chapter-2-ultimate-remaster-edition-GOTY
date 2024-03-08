@@ -10,6 +10,9 @@ public class playerScript : MonoBehaviour
     [SerializeField] private GameObject bulletRef;
     [SerializeField] private GameObject particleRef;
     [SerializeField] private Transform[] bulletSpawn;
+    
+    [SerializeField] private AudioSource shootSound;
+    [SerializeField] private AudioSource damageSound;
 
     private Vector2 input;
     private bool isShooting;
@@ -53,6 +56,9 @@ public class playerScript : MonoBehaviour
     {
         if(isShooting && delay >= shootDelay)
         {
+            shootSound.pitch = (Random.Range(0.8f, 1.2f));
+            shootSound.Play();
+
             delay = 0;
             for(int i = 0; i < bulletSpawn.Length; i++)
             {
@@ -87,6 +93,8 @@ public class playerScript : MonoBehaviour
 
     public void Damaged()
     {
+        damageSound.Play();
+
         life--;
 
         StartCoroutine("PlayerBlink");

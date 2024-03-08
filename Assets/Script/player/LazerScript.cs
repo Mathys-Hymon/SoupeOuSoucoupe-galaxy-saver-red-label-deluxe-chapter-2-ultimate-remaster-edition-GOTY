@@ -6,6 +6,8 @@ public class LazerScript : MonoBehaviour
     public void setLazer()
     {
         lazer = true;
+        GetComponent<AudioSource>().pitch = (Random.Range(0.8f, 1.2f));
+        GetComponent<AudioSource>().Play();
         GetComponent<ParticleSystem>().Play();
         Invoke(nameof(StopLazer), 5);
     }
