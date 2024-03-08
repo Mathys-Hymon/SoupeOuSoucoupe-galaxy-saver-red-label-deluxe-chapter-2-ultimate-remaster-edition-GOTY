@@ -14,7 +14,7 @@ public class EnnemiScript : MonoBehaviour
     private bool goUp;
     private Vector2 startPostion;
     private Rigidbody rb;
-    private int formationPos;
+    private float formationPos;
 
     private enum bulletTypeEnum
     {
@@ -31,8 +31,9 @@ public class EnnemiScript : MonoBehaviour
     {
         startPostion = transform.position;
         rb = GetComponent<Rigidbody>();
-        InvokeRepeating("shoot", 0f, 5/shootRate);
     }
+
+
 
 
     public void InitializeEnnemie(int _bulletPerShoot, int _lifePoints, float _speed, float _shootRate, int formationPosition)
@@ -43,6 +44,12 @@ public class EnnemiScript : MonoBehaviour
         shootRate = _shootRate;
         formationPos = formationPosition;
         angle -= formationPos/1.5f;
+        Invoke(nameof(InvokeShoot), formationPos/5);
+    }
+
+    private void InvokeShoot()
+    {
+        InvokeRepeating("shoot", 0, 5 / shootRate);
     }
 
     private void FixedUpdate()

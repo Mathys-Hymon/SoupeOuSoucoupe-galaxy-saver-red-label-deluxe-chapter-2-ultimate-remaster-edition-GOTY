@@ -28,35 +28,35 @@ public class EnnemiSpawner : MonoBehaviour
             bulletPerShoot = 1;
             lifePoint = 1;
             speed = 1;
-            shootRate = 5;
+            shootRate = 3;
         }
         else if (wave > 3 && wave < 7)
         {
             bulletPerShoot = 2;
             lifePoint = 2;
             speed = 1;
-            shootRate = 7;
+            shootRate = 4;
         }
         else if (wave >= 7 && wave < 12)
         {
             bulletPerShoot = 3;
             lifePoint = 2;
             speed = 2;
-            shootRate = 8;
+            shootRate = 5;
         }
         else if (wave >= 12 && wave < 15)
         {
             bulletPerShoot = 3;
             lifePoint = 3;
             speed = 2.5f;
-            shootRate = 10;
+            shootRate = 7;
         }
         else if (wave >= 15 && wave < 20)
         {
             bulletPerShoot = 4;
             lifePoint = 3;
             speed = 2.5f;
-            shootRate = 7;
+            shootRate = 8;
         }
 
         int Formation = Random.Range(0, EnnemieFormation.Length - 1);
@@ -70,6 +70,5 @@ public class EnnemiSpawner : MonoBehaviour
         }
 
         wave++;
-        print(wave);
     }
 }

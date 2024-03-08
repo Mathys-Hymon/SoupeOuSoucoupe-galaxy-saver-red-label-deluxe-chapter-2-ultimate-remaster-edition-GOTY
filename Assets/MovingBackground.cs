@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class MovingBackground : MonoBehaviour
 {
-    private float speed = 0.01f;
-    private MeshRenderer renderer;
+    [SerializeField] private float speed = 0.01f;
+    private MeshRenderer _renderer;
 
     private void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
+        _renderer = GetComponent<MeshRenderer>();
     }
 
     private void Update()
     {
-        renderer.material.mainTextureOffset = new Vector2 (Time.time * -speed, 0);
+        _renderer.material.mainTextureOffset = new Vector2 (Time.time * -speed, 0);
     }
 }
