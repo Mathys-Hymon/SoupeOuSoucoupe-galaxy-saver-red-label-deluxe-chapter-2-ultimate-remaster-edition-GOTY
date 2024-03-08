@@ -14,6 +14,10 @@ public class EnnemiScript : MonoBehaviour
     [SerializeField] private GameObject impactPrefab;
     [SerializeField] private GameObject explosionPrefab;
 
+    [SerializeField] private AudioSource impactSound;
+    [SerializeField] private AudioSource explosionSound;
+    [SerializeField] private AudioSource shootSound;
+
     private float angle = 0f;
     private bool goUp, canDie;
     private Vector2 startPostion;
@@ -109,6 +113,9 @@ public class EnnemiScript : MonoBehaviour
         {
             for (int i = 0; i < bulletPerShoot; i++)
             {
+                shootSound.pitch = (Random.Range(0.8f, 1.2f));
+                shootSound.Play();
+
                 var bullet = Instantiate(bulletRef, transform.position + -Vector3.right, Quaternion.identity);
                 var bulletScript = bullet.GetComponent<EnnemiBulletScript>();
 
@@ -142,12 +149,19 @@ public class EnnemiScript : MonoBehaviour
         if (collision.gameObject.GetComponent<playerBulletScript>() != null)
         {
             lifePoints--;
+
+            impactSound.pitch = (Random.Range(0.8f, 1.2f));
+            impactSound.Play();
             Instantiate(impactPrefab, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
+
             if (lifePoints <= 0)
             {
-                Instantiate(explosionPrefab, collision.transform.position, collision.transform.rotation);
-                Die();
+                explosionSound.pitch = (Random.Range(0.8f, 1.2f));
+                explosionSound.Play();
+                Instantiate(explosionPrefab, transform.position, transform.rotation);
+                
+                Invoke("Die", 0.2f);
             }
         }
         else if (collision.gameObject.GetComponent<playerScript>() != null)
@@ -179,7 +193,11 @@ public class EnnemiScript : MonoBehaviour
         if(canDie)
         {
             playerScript.instance.AddScore(10);
+            explosionSound.pitch = (Random.Range(0.8f, 1.2f));
+            explosionSound.Play();
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
+
 }

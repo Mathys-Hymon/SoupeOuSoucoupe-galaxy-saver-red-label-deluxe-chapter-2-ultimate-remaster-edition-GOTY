@@ -66,6 +66,9 @@ public class EnnemiSpawner : MonoBehaviour
 
         if(wave % 5 == 0 && wave != 0)
         {
+            GameObject.Find("WavesMusic").GetComponent<AudioSource>().Stop();
+            GameObject.Find("BossMusic").GetComponent<AudioSource>().Play();
+
             GameObject bossRef  = Instantiate(boss, gameObject.transform);
             bossRef.transform.localPosition = new Vector3(-6.5f, bossRef.transform.position.y, 1.87f);
         }
