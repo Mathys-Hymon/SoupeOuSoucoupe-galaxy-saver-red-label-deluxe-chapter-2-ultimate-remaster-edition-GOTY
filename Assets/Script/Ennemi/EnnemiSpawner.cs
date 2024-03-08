@@ -1,19 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnnemiSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] EnnemieFormation;
-
+    [SerializeField] GameObject[] ennemieFormation;
+    [SerializeField] GameObject boss;
+ 
     private int wave;
     private int bulletPerShoot;
     private int lifePoint;
     private float speed;
     private float shootRate;
+    private bool canSpawn = true;
 
     private void Update()
     {
-        if (GameObject.FindObjectsOfType<EnnemiScript>().Length == 0)
+        if (GameObject.FindObjectsOfType<EnnemiScript>().Length == 0 && GameObject.FindObjectsOfType<Shooting>().Length == 0 && canSpawn)
         {
+            canSpawn = false;
             SpawnWave();
         }
     }
@@ -57,16 +61,25 @@ public class EnnemiSpawner : MonoBehaviour
             shootRate = 8;
         }
 
-        int Formation = Random.Range(0, EnnemieFormation.Length - 1);
-        Instantiate(EnnemieFormation[Formation], gameObject.transform);
-        EnnemiScript[] ennemies = GameObject.FindObjectsOfType<EnnemiScript>();
-        int i = 0;
-        foreach (EnnemiScript ennemie in ennemies)
-        {
-            ennemie.InitializeEnnemie(bulletPerShoot, lifePoint, speed, shootRate, i);
-            i++;
-        }
 
+        if(wave % 5 == 0 && wave != 0)
+        {
+            GameObject bossRef  = Instantiate(boss, gameObject.transform);
+            bossRef.transform.localPosition = new Vector3(-5.49f, bossRef.transform.position.y, 1.87f);
+        }
+        else
+        {
+            int Formation = Random.Range(0, ennemieFormation.Length - 1);
+            Instantiate(ennemieFormation[Formation], gameObject.transform);
+            EnnemiScript[] ennemies = GameObject.FindObjectsOfType<EnnemiScript>();
+            int i = 0;
+            foreach (EnnemiScript ennemie in ennemies)
+            {
+                ennemie.InitializeEnnemie(bulletPerShoot, lifePoint, speed, shootRate, i);
+                i++;
+            }
+        }
         wave++;
+        canSpawn = true;
     }
 }

@@ -10,10 +10,9 @@ public class EnnemiScript : MonoBehaviour
     [SerializeField] private int lifePoints;
     [SerializeField] private bulletTypeEnum bulletType;
     [SerializeField] private movementEnum movementType;
-    [SerializeField] private bool canMove = false;
 
     private float angle = 0f;
-    private bool goUp;
+    private bool goUp, canDie;
     private Vector2 startPostion;
     private Rigidbody rb;
     private float formationPos;
@@ -32,15 +31,9 @@ public class EnnemiScript : MonoBehaviour
     private void Start()
     {
         startPostion = transform.position;
-        if(canMove)
-        {
             rb = GetComponent<Rigidbody>();
-        }
         InvokeRepeating("shoot", 0f, 5/shootRate);
     }
-
-
-
 
     public void InitializeEnnemie(int _bulletPerShoot, int _lifePoints, float _speed, float _shootRate, int formationPosition)
     {
@@ -51,8 +44,12 @@ public class EnnemiScript : MonoBehaviour
         formationPos = formationPosition;
         angle -= formationPos/1.5f;
         Invoke(nameof(InvokeShoot), formationPos/5);
+        Invoke(nameof(SetDie), 0.6f);
     }
-
+    private void SetDie()
+    {
+        canDie = true;
+    }
     private void InvokeShoot()
     {
         InvokeRepeating("shoot", 0, 5 / shootRate);
@@ -62,8 +59,6 @@ public class EnnemiScript : MonoBehaviour
     {
         Quaternion rotation = Quaternion.identity;
 
-        if (canMove)
-        {
             transform.GetChild(0).localRotation = Quaternion.Slerp(transform.GetChild(0).localRotation, Quaternion.Euler(Mathf.Clamp(-rb.velocity.x * 12, -12, 12), -90, Mathf.Clamp(-rb.velocity.y * 10, -20, 20)), 20 * Time.deltaTime);
             if (transform.position.y >= 6.15f)
             {
@@ -98,8 +93,6 @@ public class EnnemiScript : MonoBehaviour
                     rb.MovePosition(new Vector3(x, y, 0));
                     break;
             }
-
-        }
 
         if(transform.position.x  < -20)
         {
@@ -161,15 +154,25 @@ public class EnnemiScript : MonoBehaviour
 
     private void Die()
     {
-        int spawnCollectible = Random.Range(0, 100);
-
-        print(spawnCollectible);
-        if(spawnCollectible < 6)
+        if(canDie)
         {
-            print("SPAWN POWER UP");
-            var PowerUp = Instantiate(powerUpRef[0], transform);
-            PowerUp.transform.parent = null;
+            int spawnCollectible = Random.Range(0, 100);
+
+            if (spawnCollectible < 6)
+            {
+                var PowerUp = Instantiate(powerUpRef[0], transform);
+                PowerUp.transform.parent = null;
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+
+    }
+
+    public void DieLaser()
+    {
+        if(canDie)
+        {
+            Destroy(gameObject);
+        }
     }
 }
