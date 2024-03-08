@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 6113646501323560931}
   m_Layer: 0
   m_Name: BossSphere2
-  m_TagString: Untagged
+  m_TagString: Ennemie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,4 +340,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a47bfc2f76ab5004f8c86aff2ea6dad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 3

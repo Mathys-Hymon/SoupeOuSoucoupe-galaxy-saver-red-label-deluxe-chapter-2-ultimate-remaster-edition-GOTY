@@ -65,7 +65,7 @@ public class EnnemiSpawner : MonoBehaviour
         if(wave % 5 == 0 && wave != 0)
         {
             GameObject bossRef  = Instantiate(boss, gameObject.transform);
-            bossRef.transform.localPosition = new Vector3(-5.49f, bossRef.transform.position.y, 1.87f);
+            bossRef.transform.localPosition = new Vector3(-6.5f, bossRef.transform.position.y, 1.87f);
         }
         else
         {

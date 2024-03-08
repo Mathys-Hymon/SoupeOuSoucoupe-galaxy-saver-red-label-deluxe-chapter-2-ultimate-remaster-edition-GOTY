@@ -10,7 +10,6 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform firePoint2;
     [SerializeField] private Transform firePoint3;
     [SerializeField] private float fireRate = 2f;
-    [SerializeField] private GameObject lifeBar;
     [SerializeField] private GameObject impactPrefab;
 
     [SerializeField] private int lifePoints;
@@ -252,7 +251,7 @@ public class Shooting : MonoBehaviour
             Instantiate(impactPrefab, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
             lifePoints--;
-            lifeBar.GetComponent<Slider>().value = lifePoints;
+            GameObject.Find("BossLife").GetComponent<Slider>().value = lifePoints;
             if (lifePoints <= 0)
             {
                 GetComponent<Animator>().enabled = true;

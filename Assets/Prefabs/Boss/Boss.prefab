@@ -767,15 +767,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f79ef7fbd771ad946bc84e98cd06ccc9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.49
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f79ef7fbd771ad946bc84e98cd06ccc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f79ef7fbd771ad946bc84e98cd06ccc9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.94
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f79ef7fbd771ad946bc84e98cd06ccc9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -889,7 +889,7 @@ MonoBehaviour:
   fireRate: 3
   lifeBar: {fileID: 0}
   impactPrefab: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
-  lifePoints: 100
+  lifePoints: 200
 --- !u!65 &4253162662902717302
 BoxCollider:
   m_ObjectHideFlags: 0
