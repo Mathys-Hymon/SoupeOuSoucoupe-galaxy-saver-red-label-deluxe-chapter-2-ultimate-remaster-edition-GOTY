@@ -224,7 +224,7 @@ public class BossShooting : MonoBehaviour
 
     void FireBulletUpDown()
     {
-        float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange;  // Use Mathf.Sin for a smooth wave motion
+        float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange; 
         Vector3 spawnPosition = firePoint.position + new Vector3(0f, verticalOffset, 0f);
 
         GameObject bullet = Instantiate(bulletPrefab, spawnPosition, firePoint.rotation);
@@ -245,7 +245,7 @@ public class BossShooting : MonoBehaviour
 
     void FireBulletUpDown2()
     {
-        float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange;  // Use Mathf.Sin for a smooth wave motion
+        float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange; 
         Vector3 spawnPosition = firePoint.position - new Vector3(0f, verticalOffset, 0f);
 
         GameObject bullet = Instantiate(bulletPrefab, spawnPosition, firePoint.rotation);

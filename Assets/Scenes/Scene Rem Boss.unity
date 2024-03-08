@@ -402,6 +402,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1440692955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4812226834522588025, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+  m_PrefabInstance: {fileID: 2771250759599421928}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1633084138
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,6 +636,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: fireRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1440692955}
+    - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 9065906998282379174, guid: 2b6a2a979a81f994da0147c34eb0b520, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
