@@ -1,4 +1,6 @@
+using CartoonFX;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
@@ -7,8 +9,12 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform firePoint1;
     [SerializeField] private Transform firePoint2;
     [SerializeField] private Transform firePoint3;
-    [SerializeField] private  float fireRate = 2f;
+    [SerializeField] private float fireRate = 2f;
+    [SerializeField] private GameObject lifeBar;
+    [SerializeField] private GameObject impactPrefab;
 
+    [SerializeField] private int lifePoints;
+    private bool canShoot = true;
 
     private float verticalRange = 6f;  // Adjust the vertical range as needed
     private float bulletSpeed = 5f;    // Adjust the speed of the bullets
@@ -18,6 +24,8 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {
+        lifeBar.SetActive(true);
+
         RandomShootingPattern();
     }
 
@@ -111,7 +119,6 @@ public class Shooting : MonoBehaviour
 
         RandomShootingPattern();
     }
-
 
     void ShootSinus()
     {
@@ -232,5 +239,71 @@ public class Shooting : MonoBehaviour
     {
         CancelInvoke("FireBulletUpDown");
         RandomShootingPattern();
+    }
+}
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.GetComponent<playerBulletScript>() != null)
+        {
+            Instantiate(impactPrefab, collision.transform.position, collision.transform.rotation);
+            Destroy(collision.gameObject);
+            lifePoints--;
+            lifeBar.GetComponent<Slider>().value = lifePoints;
+            if (lifePoints <= 0)
+            {
+                GetComponent<Animator>().enabled = true;
+            }
+        }
+        else if (collision.gameObject.GetComponent<playerScript>() != null)
+        {
+            collision.gameObject.GetComponent<playerScript>().Damaged();
+        }
+    }
+
+    public void SmallExplosion1()
+    {
+        GameObject.Find("Explosion1").GetComponent<ParticleSystem>().Play();
+        GameObject.Find("Explosion1").GetComponent<CFXR_Effect>().enabled = true;
+    }
+
+    public void SmallExplosion2()
+    {
+        GameObject.Find("Explosion2").GetComponent<ParticleSystem>().Play();
+        GameObject.Find("Explosion2").GetComponent<CFXR_Effect>().enabled = true;
+    }
+
+    public void SmallExplosion3()
+    {
+        GameObject.Find("Explosion3").GetComponent<ParticleSystem>().Play();
+        GameObject.Find("Explosion3").GetComponent<CFXR_Effect>().enabled = true;
+    }
+
+    public void FinalExplosion()
+    {
+        Invoke("HideMesh", 0.4f);
+
+        GameObject.Find("FinalExplosion1").GetComponent<ParticleSystem>().Play();
+        GameObject.Find("FinalExplosion1").GetComponent<CFXR_Effect>().enabled = true;
+        GameObject.Find("FinalExplosion2").GetComponent<ParticleSystem>().Play();
+        GameObject.Find("FinalExplosion2").GetComponent<CFXR_Effect>().enabled = true;
+
+        Invoke("Die", 1);
+    }
+
+    private void HideMesh()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("BossDecoTurret1").SetActive(false);
+        GameObject.Find("BossDecoTurret2").SetActive(false);
+        GameObject.Find("BossMidTurret").SetActive(false);
+        GameObject.Find("BossBotTurret").SetActive(false);
+        GameObject.Find("BossTopTurret").SetActive(false);
+        GameObject.Find("BossPipe").SetActive(false);
+        GameObject.Find("BossAntenna").SetActive(false);
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
