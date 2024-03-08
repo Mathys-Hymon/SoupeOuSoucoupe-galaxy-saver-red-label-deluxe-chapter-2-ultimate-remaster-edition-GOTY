@@ -163,6 +163,7 @@ public class EnnemiScript : MonoBehaviour
                 var PowerUp = Instantiate(powerUpRef[0], transform);
                 PowerUp.transform.parent = null;
             }
+            playerScript.instance.AddScore(10);
             Destroy(gameObject);
         }
 
@@ -172,6 +173,7 @@ public class EnnemiScript : MonoBehaviour
     {
         if(canDie)
         {
+            playerScript.instance.AddScore(10);
             Destroy(gameObject);
         }
     }

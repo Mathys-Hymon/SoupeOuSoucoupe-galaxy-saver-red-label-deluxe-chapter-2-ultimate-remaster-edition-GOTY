@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
-    public float speed = 10f;
+    [SerializeField] private float speed = 10f;
     private float verticalSpeed = 10f;
 
     void Update()
@@ -27,5 +27,13 @@ public class BulletMovement : MonoBehaviour
     {
         Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
         return viewportPosition.x < 0f;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && !other.gameObject.GetComponent<playerScript>().GetIsInvicible())
+        {
+            Destroy(gameObject);
+        }
     }
 }

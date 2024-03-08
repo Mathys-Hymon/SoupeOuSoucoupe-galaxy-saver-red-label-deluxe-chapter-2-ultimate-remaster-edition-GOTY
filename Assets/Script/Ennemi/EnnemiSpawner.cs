@@ -20,6 +20,8 @@ public class EnnemiSpawner : MonoBehaviour
             canSpawn = false;
             SpawnWave();
         }
+
+
     }
 
 

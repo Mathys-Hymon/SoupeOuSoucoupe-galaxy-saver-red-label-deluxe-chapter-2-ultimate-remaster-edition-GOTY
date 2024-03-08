@@ -31,18 +31,20 @@ public class Shooting : MonoBehaviour
         if(lifeBar != null )
         {
             lifeBar.SetActive(true );
+
         }
     }
 
 
     void RandomShootingPattern()
     {
+        if(canShoot) {
         CancelInvoke(nameof(RandomShootingPattern));
         int patternSelector = 0;
 
         do
         {
-            patternSelector = Random.Range(0, 4);  // Change the range based on the number of patterns
+            patternSelector = Random.Range(1, 4);  // Change the range based on the number of patterns
         } while (patternSelector == lastPattern);
 
         lastPattern = patternSelector;
@@ -52,9 +54,6 @@ public class Shooting : MonoBehaviour
 
         switch (patternSelector)
         {
-            case 0:
-                ShootStraight();
-                break;
             case 1:
                 ShootMult();
                 break;
@@ -68,6 +67,7 @@ public class Shooting : MonoBehaviour
             case 4:
                 ShootUpDown();
                 break;
+        }
         }
     }
 
@@ -255,6 +255,9 @@ public class Shooting : MonoBehaviour
             lifeBar.GetComponent<Slider>().value = lifePoints;
             if (lifePoints <= 0)
             {
+                playerScript.instance.AddScore(300);
+                CancelInvoke();
+                canShoot = false;
                 GetComponent<Animator>().enabled = true;
             }
         }

@@ -14,6 +14,7 @@ public class playerScript : MonoBehaviour
     private Vector2 input;
     private bool isShooting;
     private int life;
+    private int score;
     private bool isInvicible = false;
 
     private float delay;
@@ -131,5 +132,11 @@ public class playerScript : MonoBehaviour
     public bool GetIsInvicible()
     {
         return isInvicible;
+    }
+
+    public void AddScore(int _score)
+    {
+        score += _score;
+        GameObject.FindObjectOfType<InGameScript>().Setscore(score);
     }
 }
