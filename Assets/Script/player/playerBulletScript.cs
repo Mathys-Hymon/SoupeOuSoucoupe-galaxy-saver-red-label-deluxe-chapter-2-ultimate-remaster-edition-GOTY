@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class playerBulletScript : MonoBehaviour
@@ -17,6 +15,15 @@ public class playerBulletScript : MonoBehaviour
 
         if(transform.position.x > 14f)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<EnnemiBulletScript>() != null)
+        {
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }

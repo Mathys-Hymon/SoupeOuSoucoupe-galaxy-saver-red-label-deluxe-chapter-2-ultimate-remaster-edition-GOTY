@@ -120,13 +120,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  frequency: 0.76
-  explosion: {fileID: 7928295531859852280}
+  frequency: 0.95
   wave:
     serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -6.3889623
+      outSlope: -6.3889623
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.06490806
+    - serializedVersion: 3
+      time: 0.5001676
+      value: 0.000416914
+      inSlope: 4.6424146
+      outSlope: 4.6424146
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31432384
+      outWeight: 0.07592893
+    - serializedVersion: 3
+      time: 1.0000671
+      value: 0.00006354682
+      inSlope: -7.158005
+      outSlope: -7.158005
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.053393487
+      outWeight: 0
+    m_PreInfinity: 1
+    m_PostInfinity: 1
     m_RotationOrder: 4
 --- !u!1001 &5747216871439058164
 PrefabInstance:
@@ -257,11 +283,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
---- !u!1 &7928295531859852280 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
-  m_PrefabInstance: {fileID: 5747216871439058164}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7928295531860010968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2433282508538045228, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}

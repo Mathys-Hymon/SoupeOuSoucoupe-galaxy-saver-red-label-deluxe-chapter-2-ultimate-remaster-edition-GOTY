@@ -81,6 +81,11 @@ public class EnnemiScript : MonoBehaviour
                 rb.MovePosition(new Vector3(x, y, 0));
                 break;
         }
+
+        if(transform.position.x  < -20)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void shoot()
@@ -113,13 +118,12 @@ public class EnnemiScript : MonoBehaviour
 
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.GetComponent<playerBulletScript>() != null)
+        if (collision.gameObject.GetComponent<playerBulletScript>() != null)
         {
             lifePoints--;
-            if(lifePoints <= 0)
+            if (lifePoints <= 0)
             {
                 Destroy(collision.gameObject);
                 Die();
@@ -127,7 +131,7 @@ public class EnnemiScript : MonoBehaviour
         }
         else if (collision.gameObject.GetComponent<playerScript>() != null)
         {
-            collision.gameObject.GetComponent<playerScript>().Damaged(1);
+            collision.gameObject.GetComponent<playerScript>().Damaged();
         }
     }
 

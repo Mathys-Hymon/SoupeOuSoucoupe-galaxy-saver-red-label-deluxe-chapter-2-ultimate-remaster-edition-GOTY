@@ -9,11 +9,13 @@ public class EnnemiBulletScript : MonoBehaviour
     private int bulletType;
     private float timer = 0f;
     private Vector3 direction;
+    private Vector3 initialPosition;
 
     public void InitializeBullet(int _bulletType, Vector3 _direction)
     {
         direction = _direction;
         bulletType = _bulletType;
+        initialPosition = transform.position;
     }
 
     void Update()
@@ -23,12 +25,12 @@ public class EnnemiBulletScript : MonoBehaviour
             case 0:
                 timer += Time.deltaTime * frequency;
 
-                transform.localPosition = new Vector3(transform.localPosition.x, wave.Evaluate(timer) * frequency, 0);
-                transform.localPosition += -Vector3.right * speed * Time.deltaTime;
+                transform.position = new Vector3(transform.position.x, initialPosition.y + (wave.Evaluate(Time.timeSinceLevelLoad) * frequency), initialPosition.z);
+                transform.position += -Vector3.right * speed * Time.deltaTime;
                 break;
 
            case 1:
-                transform.localPosition += direction * speed * Time.deltaTime;
+                transform.position += direction * speed * Time.deltaTime;
                 break;
         }
 
