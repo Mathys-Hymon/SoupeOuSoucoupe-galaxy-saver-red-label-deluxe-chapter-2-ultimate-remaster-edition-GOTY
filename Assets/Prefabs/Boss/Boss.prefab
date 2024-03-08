@@ -904,7 +904,7 @@ MonoBehaviour:
   shootSound: {fileID: 5244962198445742786}
   smallExplosion: {fileID: 5076552412235317859}
   finalExplosion: {fileID: 8500148329088730411}
-  lifePoints: 300
+  lifePoints: 200
 --- !u!65 &4253162662902717302
 BoxCollider:
   m_ObjectHideFlags: 0

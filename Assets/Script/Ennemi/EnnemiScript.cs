@@ -83,12 +83,12 @@ public class EnnemiScript : MonoBehaviour
                 case movementEnum.line:
                     if (goUp)
                     {
-                        rb.velocity = new Vector3(-speed / 2, speed, 0);
+                    rb.MovePosition(transform.position + new Vector3(-speed * 1.5f, speed, 0)*Time.deltaTime);
                     }
                     else
                     {
-                        rb.velocity = new Vector3(-speed / 2, -speed, 0);
-                    }
+                    rb.MovePosition(transform.position + new Vector3(-speed * 1.5f, -speed, 0)*Time.deltaTime);
+                }
                     break;
 
                 case movementEnum.round:

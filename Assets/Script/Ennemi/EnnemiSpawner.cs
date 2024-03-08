@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class EnnemiSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] ennemieFormation;
-    [SerializeField] GameObject boss;
- 
-    private int wave;
+    [SerializeField] private GameObject[] ennemieFormation;
+    [SerializeField] private GameObject boss;
+
+    [SerializeField]  private int wave;
     private int bulletPerShoot;
     private int lifePoint;
     private float speed;
@@ -71,10 +71,11 @@ public class EnnemiSpawner : MonoBehaviour
 
             GameObject bossRef  = Instantiate(boss, gameObject.transform);
             bossRef.transform.localPosition = new Vector3(-6.5f, bossRef.transform.position.y, 1.87f);
+            bossRef.transform.parent = null;
         }
         else
         {
-            int Formation = Random.Range(0, ennemieFormation.Length - 1);
+            int Formation = Random.Range(0, ennemieFormation.Length);
             Instantiate(ennemieFormation[Formation], gameObject.transform);
             EnnemiScript[] ennemies = GameObject.FindObjectsOfType<EnnemiScript>();
             int i = 0;

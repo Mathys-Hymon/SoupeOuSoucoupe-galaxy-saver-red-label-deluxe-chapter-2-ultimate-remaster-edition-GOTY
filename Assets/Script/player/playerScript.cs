@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -57,7 +57,7 @@ public class playerScript : MonoBehaviour
     {
         if(isShooting && delay >= shootDelay)
         {
-            shootSound.pitch = (Random.Range(0.8f, 1.2f));
+            shootSound.pitch = Random.Range(0.8f, 1.2f);
             shootSound.Play();
 
             delay = 0;
@@ -117,6 +117,21 @@ public class playerScript : MonoBehaviour
 
     private void Die()
     {
+        GameObject pauseMenu = GameObject.FindGameObjectWithTag("PlayerUI").transform.GetChild(1).gameObject;
+        pauseMenu.SetActive(true);
+
+        if(PlayerPrefs.HasKey("score"))
+        {
+            if (PlayerPrefs.GetInt("score") <= score)
+            {
+                PlayerPrefs.SetInt("score", score);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("score", score);
+        }
+
         Destroy(gameObject);
     }
 

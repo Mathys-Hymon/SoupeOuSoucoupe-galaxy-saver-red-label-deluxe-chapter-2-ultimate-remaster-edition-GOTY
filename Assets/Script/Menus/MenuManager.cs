@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -14,11 +15,22 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private InputActionReference escape;
     [SerializeField] private Button startBtn;
     [SerializeField] private Slider volumeSlider;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
 
     void Start()
     {
         instance = this;
+        if(!PlayerPrefs.HasKey("score"))
+        {
+            Destroy(scoreText.transform.GetChild(0).gameObject);
+            Destroy(scoreText);
+            
+        }
+        else
+        {
+            scoreText.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =  PlayerPrefs.GetInt("score") + " !!!!";
+        }
         Return();
     }
 

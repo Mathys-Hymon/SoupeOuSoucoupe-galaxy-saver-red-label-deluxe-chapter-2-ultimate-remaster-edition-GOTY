@@ -1,4 +1,5 @@
 using CartoonFX;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,6 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform firePoint2;
     [SerializeField] private Transform firePoint3;
     [SerializeField] private float fireRate = 2f;
-    private GameObject lifeBar;
     [SerializeField] private GameObject impactPrefab;
 
     [SerializeField] private AudioSource impactSound;
@@ -21,7 +21,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private int lifePoints;
 
 
-    private bool canShoot = true;
+    private bool canShoot = true, isDead;
     private float verticalRange = 6f;  // Adjust the vertical range as needed
     private float bulletSpeed = 5f;    // Adjust the speed of the bullets
     private float timeSinceLastFire = 0f;
@@ -32,10 +32,10 @@ public class Shooting : MonoBehaviour
     private void Start()
     {
         RandomShootingPattern();
-
         lifeBar = GameObject.FindGameObjectWithTag("PlayerUI").transform.GetChild(0).gameObject;
         if(lifeBar != null )
         {
+            lifeBar.GetComponent<Slider>().value = lifePoints;
             lifeBar.SetActive(true );
 
         }
@@ -271,9 +271,11 @@ public class Shooting : MonoBehaviour
 
             Destroy(collision.gameObject);
             lifePoints--;
-            GameObject.Find("BossLife").GetComponent<Slider>().value = lifePoints;
-            if (lifePoints <= 0)
+            lifeBar.GetComponent<Slider>().value = lifePoints;
+            if (lifePoints <= 0 && !isDead)
             {
+                isDead = true;
+                lifeBar.SetActive(false);
                 playerScript.instance.AddScore(300);
                 CancelInvoke();
                 canShoot = false;
@@ -320,8 +322,7 @@ public class Shooting : MonoBehaviour
         GameObject.Find("FinalExplosion1").GetComponent<CFXR_Effect>().enabled = true;
         GameObject.Find("FinalExplosion2").GetComponent<ParticleSystem>().Play();
         GameObject.Find("FinalExplosion2").GetComponent<CFXR_Effect>().enabled = true;
-
-        Invoke("Die", 1);
+        Invoke("Die", 1f);
     }
 
     private void HideMesh()
