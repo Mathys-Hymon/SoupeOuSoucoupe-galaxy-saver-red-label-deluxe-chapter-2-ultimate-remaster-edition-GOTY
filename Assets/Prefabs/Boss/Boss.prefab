@@ -322,36 +322,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3733332832837917866}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
---- !u!1 &1177217607785214554 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
-  m_PrefabInstance: {fileID: 2060178012536721163}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3733332832837917866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177217607785214554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c55b8d8e08661459fa95e91f77ee30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletRef: {fileID: 3391749456119138619, guid: 2d8e41ad674972f468c0f45420b1bb06, type: 3}
-  shootRate: 7
-  speed: 1
-  circleRad: 5
-  bulletPerShoot: 9
-  lifePoints: 1
-  bulletType: 1
-  movementType: 1
 --- !u!4 &1953860207854430432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
@@ -379,15 +351,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5476357053559d04587608261753ae81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.69707566
+      value: 0.7595
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5476357053559d04587608261753ae81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.56391877
+      value: 0.4241
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5476357053559d04587608261753ae81, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09942374
+      value: 0.0994
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5476357053559d04587608261753ae81, type: 3}
       propertyPath: m_LocalRotation.w
@@ -546,9 +518,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f683ee135430d04fa66bf04ab0493b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 9065906998282379174, guid: 2b6a2a979a81f994da0147c34eb0b520, type: 3}
-  firePoint: {fileID: 3593815023726784537}
-  fireRate: 2
+  bulletPrefab1: {fileID: 9065906998282379174, guid: 2b6a2a979a81f994da0147c34eb0b520, type: 3}
+  bulletPrefab2: {fileID: 9065906998282379174, guid: 81e8e09b880c5714ab02caf495a3725a, type: 3}
+  firePoint1: {fileID: 3593815023726784537}
+  firePoint2: {fileID: 7637692913309591372}
+  firePoint3: {fileID: 1953860207854430432}
+  fireRate: 3
 --- !u!1001 &5384384107926997664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -690,36 +665,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7074674537784973237}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
---- !u!1 &7112689668288052726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
-  m_PrefabInstance: {fileID: 7959039494918455463}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7074674537784973237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7112689668288052726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c55b8d8e08661459fa95e91f77ee30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletRef: {fileID: 3391749456119138619, guid: 2d8e41ad674972f468c0f45420b1bb06, type: 3}
-  shootRate: 7
-  speed: 1
-  circleRad: 5
-  bulletPerShoot: 9
-  lifePoints: 1
-  bulletType: 1
-  movementType: 1
 --- !u!4 &7637692913309591372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3f656a92fee0424aaf607e831cb834f, type: 3}
