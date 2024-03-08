@@ -3,10 +3,10 @@ using UnityEngine;
 public class BossShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public Transform firePoint;
+    public Transform firePoint1;
+    public Transform firePoint2;
+    public Transform firePoint3;
     public float fireRate = 2f;  // Bullets per second
-
-    private float timeSinceLastFire = 0f;
 
 
 
@@ -43,8 +43,6 @@ public class BossShooting : MonoBehaviour
 
     void ShootStraight()
     {
-        Debug.Log("Straight");
-
         // Shoot multiple bullets with a certain fire rate until canceled
         InvokeRepeating("FireBulletStraight", 0f, 1f / fireRate);
 
@@ -55,7 +53,9 @@ public class BossShooting : MonoBehaviour
 
     void FireBulletStraight()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Instantiate(bulletPrefab, firePoint1.position, firePoint1.rotation);
+        Instantiate(bulletPrefab, firePoint2.position, firePoint2.rotation);
+        Instantiate(bulletPrefab, firePoint3.position, firePoint3.rotation);
     }
 
     void StopShootingStraight()
@@ -90,7 +90,9 @@ public class BossShooting : MonoBehaviour
         foreach (float angle in angles)
         {
             Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
-            Instantiate(bulletPrefab, firePoint.position, rotation);
+            Instantiate(bulletPrefab, firePoint1.position, rotation);
+            Instantiate(bulletPrefab, firePoint2.position, rotation);
+            Instantiate(bulletPrefab, firePoint3.position, rotation);
         }
 
     }
@@ -107,9 +109,6 @@ public class BossShooting : MonoBehaviour
 
     void ShootSinusoidalWave()
     {
-        Debug.Log("Sinus");
-
-
         Invoke("RandomShootingPattern", 5f);
     }
 
