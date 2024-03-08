@@ -1,16 +1,20 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class playerScript : MonoBehaviour
 {
     [SerializeField] private float shootDelay;
     [SerializeField] private float movementSpeed = 1;
+    [SerializeField] private int maxLife;
     [SerializeField] private GameObject bulletRef;
+    [SerializeField] private GameObject particleRef;
     [SerializeField] private Transform[] bulletSpawn;
 
     private Vector2 input;
     private bool isShooting;
+    private int life;
+    private bool isInvicible = false;
 
     private float delay;
     public static playerScript instance;
@@ -18,6 +22,8 @@ public class playerScript : MonoBehaviour
     private void Start()
     {
         instance = this;
+
+        life = maxLife;
     }
     public void playerMovement(InputAction.CallbackContext context)
     {
@@ -31,9 +37,14 @@ public class playerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Ennemie")
+        if (other.gameObject.tag == "Ennemie" && !isInvicible)
         {
-            print("damaged");
+            Damaged();
+        }
+        else if(other.gameObject.GetComponent<PickeableScript>() != null)
+        {
+            transform.GetChild(1).GetComponent<LazerScript>().setLazer();
+            Destroy(other.gameObject);
         }
 
     }
@@ -59,11 +70,9 @@ public class playerScript : MonoBehaviour
         {
             transform.position -= new Vector3(transform.position.x/50 * Time.deltaTime, 0,0);
         }
-
         else
         {
             transform.position += new Vector3(input.x * (movementSpeed / 1.5f) * Time.deltaTime, 0, 0);
-            
         }
         if (Mathf.Abs(transform.position.y) >= 6.15f)
         {
@@ -73,8 +82,54 @@ public class playerScript : MonoBehaviour
         {
             transform.position += new Vector3(0, input.y * (movementSpeed / 1.5f) * Time.deltaTime, 0);
         }
-
         transform.GetChild(0).localRotation = Quaternion.Slerp(transform.GetChild(0).localRotation, Quaternion.Euler(input.x * 10, 90, input.y * 30), 20 * Time.deltaTime);
+    }
 
+    public void Damaged()
+    {
+        life--;
+
+        StartCoroutine("PlayerBlink");
+
+        if(life == 2)
+        {
+            GameObject.Find("Life3").SetActive(false);
+        }
+        else if (life == 1)
+        {
+            GameObject.Find("Life2").SetActive(false);
+        }
+        else if (life == 0)
+        {
+            GameObject.Find("Life1").SetActive(false);
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    IEnumerator PlayerBlink()
+    {
+        yield return new WaitForSeconds(0.01f);
+        isInvicible = true;
+
+        for (int i = 0; i < 5; i++)
+        {
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
+
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        isInvicible = false;
+    }
+
+    public bool GetIsInvicible()
+    {
+        return isInvicible;
     }
 }
