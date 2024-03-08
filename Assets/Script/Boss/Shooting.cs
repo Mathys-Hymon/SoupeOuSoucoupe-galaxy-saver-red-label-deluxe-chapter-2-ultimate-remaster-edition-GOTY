@@ -11,6 +11,7 @@ public class BossShooting : MonoBehaviour
     [SerializeField] private Transform firePoint3;
     [SerializeField] private float fireRate = 2f;
     [SerializeField] private GameObject lifeBar;
+    [SerializeField] private GameObject impactPrefab;
 
     [SerializeField] private int lifePoints;
     private bool canShoot = true;
@@ -75,11 +76,12 @@ public class BossShooting : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<playerBulletScript>() != null)
         {
+            Instantiate(impactPrefab, collision.transform.position, collision.transform.rotation);
+            Destroy(collision.gameObject);
             lifePoints--;
             lifeBar.GetComponent<Slider>().value = lifePoints;
             if (lifePoints <= 0)
             {
-                Destroy(collision.gameObject);
                 GetComponent<Animator>().enabled = true;
             }
         }
