@@ -10,6 +10,7 @@ public class EnnemiScript : MonoBehaviour
     [SerializeField] private int lifePoints;
     [SerializeField] private bulletTypeEnum bulletType;
     [SerializeField] private movementEnum movementType;
+    [SerializeField] private bool canMove = false;
 
     private float angle = 0f;
     private bool goUp;
@@ -31,7 +32,11 @@ public class EnnemiScript : MonoBehaviour
     private void Start()
     {
         startPostion = transform.position;
-        rb = GetComponent<Rigidbody>();
+        if(canMove)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        InvokeRepeating("shoot", 0f, 5/shootRate);
     }
 
 
@@ -57,37 +62,43 @@ public class EnnemiScript : MonoBehaviour
     {
         Quaternion rotation = Quaternion.identity;
 
-        transform.GetChild(0).localRotation = Quaternion.Slerp(transform.GetChild(0).localRotation, Quaternion.Euler(Mathf.Clamp(-rb.velocity.x * 12, -12, 12), -90, Mathf.Clamp(-rb.velocity.y * 10, -20, 20)), 20 * Time.deltaTime);
-        if (transform.position.y >= 6.15f)
+        if (canMove)
         {
-            goUp = false;
-        }
-        else if (transform.position.y <= -6.15f)
-        {
-            goUp = true;
-        }
+            transform.GetChild(0).localRotation = Quaternion.Slerp(transform.GetChild(0).localRotation, Quaternion.Euler(Mathf.Clamp(-rb.velocity.x * 12, -12, 12), -90, Mathf.Clamp(-rb.velocity.y * 10, -20, 20)), 20 * Time.deltaTime);
+            if (transform.position.y >= 6.15f)
+            {
+                goUp = false;
+            }
+            else if (transform.position.y <= -6.15f)
+            {
+                goUp = true;
+            }
 
-        switch (movementType)
-        {
-            case movementEnum.line:
-                if (goUp)
-                {
-                    rb.velocity = new Vector3(-speed / 2, speed, 0);
-                }
-                else
-                {
-                    rb.velocity = new Vector3(-speed / 2, -speed, 0);
-                }
-                break;
 
-            case movementEnum.round:
 
-                angle += speed * Time.deltaTime;
-                float x = (startPostion.x -= (speed/2)*Time.deltaTime) + circleRad * Mathf.Cos(angle);
-                float y = startPostion.y + circleRad * Mathf.Sin(angle);
+            switch (movementType)
+            {
+                case movementEnum.line:
+                    if (goUp)
+                    {
+                        rb.velocity = new Vector3(-speed / 2, speed, 0);
+                    }
+                    else
+                    {
+                        rb.velocity = new Vector3(-speed / 2, -speed, 0);
+                    }
+                    break;
 
-                rb.MovePosition(new Vector3(x, y, 0));
-                break;
+                case movementEnum.round:
+
+                    angle += speed * Time.deltaTime;
+                    float x = (startPostion.x -= (speed / 2) * Time.deltaTime) + circleRad * Mathf.Cos(angle);
+                    float y = startPostion.y + circleRad * Mathf.Sin(angle);
+
+                    rb.MovePosition(new Vector3(x, y, 0));
+                    break;
+            }
+
         }
 
         if(transform.position.x  < -20)
