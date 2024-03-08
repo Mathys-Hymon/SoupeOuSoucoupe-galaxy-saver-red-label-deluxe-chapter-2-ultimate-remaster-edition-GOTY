@@ -14,8 +14,9 @@ public class Shooting : MonoBehaviour
     [SerializeField] private GameObject impactPrefab;
 
     [SerializeField] private int lifePoints;
-    private bool canShoot = true;
 
+
+    private bool canShoot = true;
     private float verticalRange = 6f;  // Adjust the vertical range as needed
     private float bulletSpeed = 5f;    // Adjust the speed of the bullets
     private float timeSinceLastFire = 0f;
@@ -24,9 +25,13 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {
-        lifeBar.SetActive(true);
-
         RandomShootingPattern();
+
+        lifeBar = GameObject.FindGameObjectWithTag("PlayerUI").transform.GetChild(0).gameObject;
+        if(lifeBar != null )
+        {
+            lifeBar.SetActive(true );
+        }
     }
 
 
@@ -240,7 +245,6 @@ public class Shooting : MonoBehaviour
         CancelInvoke("FireBulletUpDown");
         RandomShootingPattern();
     }
-}
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.GetComponent<playerBulletScript>() != null)
