@@ -6,6 +6,10 @@ public class BossShooting : MonoBehaviour
     public Transform firePoint;
     public float fireRate = 2f;  // Bullets per second
 
+
+    float verticalRange = 10f;  // Adjust the vertical range as needed
+    float bulletSpeed = 5f;    // Adjust the speed of the bullets
+
     private float timeSinceLastFire = 0f;
 
 
@@ -18,7 +22,7 @@ public class BossShooting : MonoBehaviour
 
     void RandomShootingPattern()
     {
-        int patternSelector = Random.Range(0, 4);  
+        int patternSelector = Random.Range(4, 5);  
 
 
         CancelInvoke("FireBulletStraight");
@@ -39,6 +43,9 @@ public class BossShooting : MonoBehaviour
                 break;
             case 3:
                 ShootSinus2();
+                break;
+            case 4:
+                ShootUpDown();
                 break;
                 
         }
@@ -188,6 +195,37 @@ public class BossShooting : MonoBehaviour
 
 
 
+    void ShootUpDown()
+    {
+        Debug.Log("UpDown");
+
+
+
+        InvokeRepeating("FireBulletUpDown", 0f, 1f / fireRate);
+
+        Invoke("StopShootingUpDown", 5f);
+    }
+
+    void FireBulletUpDown()
+    {
+        float verticalOffset = Random.Range(-verticalRange, verticalRange);
+        Vector3 spawnPosition = firePoint.position + new Vector3(0f, verticalOffset, 0f);
+
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, firePoint.rotation);
+
+        // Access the BulletMovement script and set the vertical speed
+        BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
+        if (bulletMovement != null)
+        {
+            bulletMovement.SetVerticalSpeed(verticalOffset);
+        }
+    }
+
+    void StopShootingUpDown()
+    {
+        CancelInvoke("FireBulletUpDown");
+        RandomShootingPattern();
+    }
 
 
 
