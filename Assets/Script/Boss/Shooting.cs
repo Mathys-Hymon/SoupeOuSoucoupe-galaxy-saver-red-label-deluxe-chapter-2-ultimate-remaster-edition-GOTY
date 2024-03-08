@@ -12,6 +12,8 @@ public class BossShooting : MonoBehaviour
 
     private float timeSinceLastFire = 0f;
 
+    private int lastPattern = -1;
+
 
 
     private void Start()
@@ -22,18 +24,22 @@ public class BossShooting : MonoBehaviour
 
     void RandomShootingPattern()
     {
-        int patternSelector = Random.Range(4, 5);  
+        int patternSelector;
 
+        do
+        {
+            patternSelector = Random.Range(1, 5);  // Change the range based on the number of patterns
+        } while (patternSelector == lastPattern);
 
-        CancelInvoke("FireBulletStraight");
+        lastPattern = patternSelector;
 
-        CancelInvoke("FireBulletMult");
+        // Cancel previous invokes to ensure no overlapping patterns
+        CancelInvoke();
 
         switch (patternSelector)
         {
             case 0:
                 ShootStraight();
-                
                 break;
             case 1:
                 ShootMult();
@@ -47,7 +53,6 @@ public class BossShooting : MonoBehaviour
             case 4:
                 ShootUpDown();
                 break;
-                
         }
     }
 
@@ -142,6 +147,14 @@ public class BossShooting : MonoBehaviour
             Instantiate(bulletPrefab, firePoint.position, rotation);
         }
 
+        for (int i = 1; i < numBullets; i++)
+        {
+            float angle = firePoint.rotation.eulerAngles.z - i * angleDifference;
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
+            Instantiate(bulletPrefab, firePoint.position, rotation);
+        }
+
+
     }
 
     void StopShootingSinus()
@@ -203,6 +216,9 @@ public class BossShooting : MonoBehaviour
 
         InvokeRepeating("FireBulletUpDown", 0f, 1f / fireRate);
 
+
+        InvokeRepeating("FireBulletUpDown2", 0f, 1f / fireRate);
+
         Invoke("StopShootingUpDown", 5f);
     }
 
@@ -219,7 +235,39 @@ public class BossShooting : MonoBehaviour
         {
             bulletMovement.SetVerticalSpeed(verticalOffset);
         }
+
+
+
+
+
     }
+
+
+    void FireBulletUpDown2()
+    {
+        float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange;  // Use Mathf.Sin for a smooth wave motion
+        Vector3 spawnPosition = firePoint.position - new Vector3(0f, verticalOffset, 0f);
+
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, firePoint.rotation);
+
+        // Access the BulletMovement script and set the vertical speed
+        BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
+        if (bulletMovement != null)
+        {
+            bulletMovement.SetVerticalSpeed(verticalOffset);
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+
 
     void StopShootingUpDown()
     {
