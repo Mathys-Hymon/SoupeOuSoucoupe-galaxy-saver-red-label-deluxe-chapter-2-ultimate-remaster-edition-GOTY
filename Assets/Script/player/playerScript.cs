@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class playerScript : MonoBehaviour
     private Vector2 input;
     private bool isShooting;
     private int life;
+    private bool isInvicible = false;
 
     private float delay;
     public static playerScript instance;
@@ -35,9 +37,9 @@ public class playerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Ennemie")
+        if (other.gameObject.tag == "Ennemie" && !isInvicible)
         {
-            Damaged(1);
+            Damaged();
         }
 
     }
@@ -78,16 +80,26 @@ public class playerScript : MonoBehaviour
         transform.GetChild(0).localRotation = Quaternion.Slerp(transform.GetChild(0).localRotation, Quaternion.Euler(input.x * 10, 90, input.y * 30), 20 * Time.deltaTime);
     }
 
-    public void Damaged(int damage)
+    public void Damaged()
     {
-        life -= damage;
-        particleRef.SetActive(false);
-        if (life == 1)
+        life--;
+
+        StartCoroutine("PlayerBlink");
+
+        if(life == 2)
         {
-            particleRef.SetActive(true);
+            GameObject.Find("Life3").SetActive(false);
+        }
+        else if (life == 1)
+        {
+            GameObject.Find("Life2").SetActive(false);
+        }
+        else if (life == 0)
+        {
+            GameObject.Find("Life1").SetActive(false);
         }
 
-        else if(life <= 0)
+        if (life < 0)
         {
             Die();
         }
@@ -95,6 +107,28 @@ public class playerScript : MonoBehaviour
 
     private void Die()
     {
-        print("dead");
+        Destroy(gameObject);
+    }
+
+    IEnumerator PlayerBlink()
+    {
+        yield return new WaitForSeconds(0.01f);
+        isInvicible = true;
+
+        for (int i = 0; i < 5; i++)
+        {
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
+
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        isInvicible = false;
+    }
+
+    public bool GetIsInvicible()
+    {
+        return isInvicible;
     }
 }
