@@ -78,6 +78,8 @@ MonoBehaviour:
   lifePoints: 1
   bulletType: 1
   movementType: 1
+  impactPrefab: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
+  explosionPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
 --- !u!54 &7253954403402188797
 Rigidbody:
   m_ObjectHideFlags: 0

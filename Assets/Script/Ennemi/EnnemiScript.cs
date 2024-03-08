@@ -11,6 +11,9 @@ public class EnnemiScript : MonoBehaviour
     [SerializeField] private bulletTypeEnum bulletType;
     [SerializeField] private movementEnum movementType;
 
+    [SerializeField] private GameObject impactPrefab;
+    [SerializeField] private GameObject explosionPrefab;
+
     private float angle = 0f;
     private bool goUp, canDie;
     private Vector2 startPostion;
@@ -139,9 +142,11 @@ public class EnnemiScript : MonoBehaviour
         if (collision.gameObject.GetComponent<playerBulletScript>() != null)
         {
             lifePoints--;
+            Instantiate(impactPrefab, collision.transform.position, collision.transform.rotation);
+            Destroy(collision.gameObject);
             if (lifePoints <= 0)
             {
-                Destroy(collision.gameObject);
+                Instantiate(explosionPrefab, collision.transform.position, collision.transform.rotation);
                 Die();
             }
         }
