@@ -659,9 +659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40d25f395830a546a2ef06ef59fba7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ennemieFormation:
-  - {fileID: 4962913926225986778, guid: 6f15fee67258407499783195149230ba, type: 3}
-  boss: {fileID: 5297260534354287043, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+  ennemieFormation: []
+  boss: {fileID: 0}
 --- !u!4 &266866731 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6756330228401215079, guid: d3f882e4af58e0e4aab8a4f27b3cf92b, type: 3}
@@ -1121,7 +1120,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10, y: 0, z: -1.03}
-  m_LocalScale: {x: 0.71, y: 0.71, z: 0.71}
+  m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1200183872}
