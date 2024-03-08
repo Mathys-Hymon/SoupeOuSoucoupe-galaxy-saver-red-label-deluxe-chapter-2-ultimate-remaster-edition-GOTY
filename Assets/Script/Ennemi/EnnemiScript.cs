@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnnemiScript : MonoBehaviour
 {
     [SerializeField] private GameObject bulletRef;
+    [SerializeField] private GameObject[] powerUpRef;
     [SerializeField] private float shootRate, speed, circleRad;
     [SerializeField] private int bulletPerShoot;
     [SerializeField] private int lifePoints;
@@ -149,6 +150,15 @@ public class EnnemiScript : MonoBehaviour
 
     private void Die()
     {
+        int spawnCollectible = Random.Range(0, 100);
+
+        print(spawnCollectible);
+        if(spawnCollectible < 6)
+        {
+            print("SPAWN POWER UP");
+            var PowerUp = Instantiate(powerUpRef[0], transform);
+            PowerUp.transform.parent = null;
+        }
         Destroy(gameObject);
     }
 }
