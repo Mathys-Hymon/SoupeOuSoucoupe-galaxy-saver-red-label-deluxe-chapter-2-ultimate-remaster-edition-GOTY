@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +24,6 @@ public class playerScript : MonoBehaviour
     private void Start()
     {
         instance = this;
-
         life = maxLife;
     }
     public void playerMovement(InputAction.CallbackContext context)

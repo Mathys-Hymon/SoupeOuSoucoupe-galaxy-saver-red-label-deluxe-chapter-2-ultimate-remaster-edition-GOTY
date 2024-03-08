@@ -20,6 +20,7 @@ public class Shooting : MonoBehaviour
     private float bulletSpeed = 5f;    // Adjust the speed of the bullets
     private float timeSinceLastFire = 0f;
     private int lastPattern = -1;
+    private GameObject lifeBar;
 
 
     private void Start()
