@@ -602,14 +602,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3593815023726784537, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7595
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593815023726784537, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4241
+      objectReference: {fileID: 0}
+    - target: {fileID: 3593815023726784537, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0994
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: fireRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
       propertyPath: firePoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1506519390}
     - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
       propertyPath: firePoint1
       value: 
-      objectReference: {fileID: 2135329661}
+      objectReference: {fileID: 1506519390}
     - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
       propertyPath: firePoint2
       value: 
@@ -617,7 +633,15 @@ PrefabInstance:
     - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
       propertyPath: firePoint3
       value: 
-      objectReference: {fileID: 1506519390}
+      objectReference: {fileID: 2135329661}
+    - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: bulletPrefab1
+      value: 
+      objectReference: {fileID: 9065906998282379174, guid: 2b6a2a979a81f994da0147c34eb0b520, type: 3}
+    - target: {fileID: 6012219399080378408, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+      propertyPath: bulletPrefab2
+      value: 
+      objectReference: {fileID: 9065906998282379174, guid: 81e8e09b880c5714ab02caf495a3725a, type: 3}
     - target: {fileID: 7199121464312208420, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
       propertyPath: m_Name
       value: craft_cargoB
@@ -662,7 +686,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7074674537784973237, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
+    - {fileID: 3733332832837917866, guid: 005b3b32851bea04eac576e0698ba50a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
