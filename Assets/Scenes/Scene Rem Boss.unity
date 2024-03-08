@@ -267,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1edb9c3940e4ad44da542178425a31ef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.09
+      value: -4.44
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1edb9c3940e4ad44da542178425a31ef, type: 3}
       propertyPath: m_LocalPosition.z
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 9065906998282379174, guid: 2b6a2a979a81f994da0147c34eb0b520, type: 3}
   firePoint: {fileID: 848048015}
-  fireRate: 6
+  fireRate: 8
 --- !u!4 &1639939575 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f79ef7fbd771ad946bc84e98cd06ccc9, type: 3}
@@ -538,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f79ef7fbd771ad946bc84e98cd06ccc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.76
+      value: -0.57
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f79ef7fbd771ad946bc84e98cd06ccc9, type: 3}
       propertyPath: m_LocalPosition.z

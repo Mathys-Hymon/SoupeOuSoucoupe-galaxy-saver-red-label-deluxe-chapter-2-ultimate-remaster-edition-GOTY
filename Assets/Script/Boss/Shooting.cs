@@ -7,7 +7,7 @@ public class BossShooting : MonoBehaviour
     public float fireRate = 2f;  // Bullets per second
 
 
-    float verticalRange = 10f;  // Adjust the vertical range as needed
+    float verticalRange = 6f;  // Adjust the vertical range as needed
     float bulletSpeed = 5f;    // Adjust the speed of the bullets
 
     private float timeSinceLastFire = 0f;
@@ -208,7 +208,7 @@ public class BossShooting : MonoBehaviour
 
     void FireBulletUpDown()
     {
-        float verticalOffset = Random.Range(-verticalRange, verticalRange);
+        float verticalOffset = Mathf.Sin(Time.time * 2f) * verticalRange;  // Use Mathf.Sin for a smooth wave motion
         Vector3 spawnPosition = firePoint.position + new Vector3(0f, verticalOffset, 0f);
 
         GameObject bullet = Instantiate(bulletPrefab, spawnPosition, firePoint.rotation);
@@ -226,6 +226,7 @@ public class BossShooting : MonoBehaviour
         CancelInvoke("FireBulletUpDown");
         RandomShootingPattern();
     }
+
 
 
 
