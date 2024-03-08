@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRef: {fileID: 3391749456119138619, guid: 2d8e41ad674972f468c0f45420b1bb06, type: 3}
+  powerUpRef:
+  - {fileID: 4076126657036933983, guid: 1993b10ef9928fa48a780e1f8f092def, type: 3}
   shootRate: 7
   speed: 1
   circleRad: 5
